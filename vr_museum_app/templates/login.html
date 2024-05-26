@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+    <style>
+        body{
+            display: grid;
+            background: linear-gradient(0deg, rgba(255, 224, 178, 0.2), rgba(255, 224, 178, 0.2)), url("https://thumb.ac-illust.com/39/39be277385782e25210f490ca97122b6_t.jpeg");
+            background-size: 100vw 100vh;  /* 背景画像の横幅をコンテナに合わせ、縦幅を自動調整 */
+            background-repeat: no-repeat;  /* 背景画像の繰り返しを無効化 */
+            background-attachment: fixed;  /* 背景画像を固定する */
+            grid-template-columns: repeat(21 ,1fr);
+            grid-template-rows: repeat(11 ,calc(100vh / 5));
+            margin: 0px;
+        }
+        #title_my{
+            grid-column: 4/5;
+            grid-row: 1/3;
+            color: #FFB5B0;
+            font-weight: bold;
+            font-size: 720%;
+            margin: 0px;
+            letter-spacing: 10px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            align-self: center;
+            justify-self: center;
+        }
+        #title_muse{
+            grid-column: 5/8;
+            grid-row: 2/4;
+            color: #FFB5B0;
+            font-weight: bold;
+            font-size: 720%;
+            margin: 0px;
+            letter-spacing: 10px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            align-self: center;
+            justify-self: center;
+        }
+
+        #sumple_photo{
+            grid-column: 1/22;
+            grid-row: 4/6;
+            background-color: #ffffffbb;
+            display: inline-flex;
+            gap: 5%;
+            padding: 10px;
+            padding-left: calc(100vw / 10);
+            padding-right: 10%;
+            padding-left: 10%;
+            justify-items: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .sumples{
+            width: auto;
+            height: calc((200vh / 5) - 20px);
+            object-fit: cover;
+        }
+        #left_move{
+            grid-column: 1/3;
+            grid-row: 4/6;
+            background-color: #ffffffbb;
+            color: #FFB5B0;
+            font-weight: lighter;
+            font-size: 100px;
+            padding: 10%;
+            align-self: center;
+            justify-self: start;
+        }
+        #right_move{
+            grid-column: 20/22;
+            grid-row: 4/6;
+            background-color: #ffffffbb;
+            color: #FFB5B0;
+            font-weight: lighter;
+            font-size: 100px;
+            padding: 10%;
+            align-self: center;
+            justify-self: end;
+        }
+        #explaination{
+            grid-column: 2/21;
+            grid-row: 6/11;
+            background-color: #ffffffbb;
+            color: #FFB5B0;
+            margin: 40px;
+            padding: 20px;
+        }
+        #ex_text{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto 1fr;
+            height: 100%;
+            width: 100%;
+            font-size: calc(100vw / 30);
+            font-weight: bold;
+            margin: 0px;
+            white-space: pre-wrap;
+            word-wrap: normal;
+        }
+        #ex_text_title{
+            grid-column: 1/3;
+            grid-row: 1/2;
+            font-size: calc(100vw / 20);
+            font-weight: bold;
+            margin: 0px;
+            padding: 10px;
+            justify-self: center;
+        }
+        #ex_text_text{
+            grid-column: 1/3;
+            grid-row: 2/3;
+            font-size: calc(100vw / 60);
+            font-weight: bold;
+            margin: 0px;
+            padding: 10px;
+        }
+        footer{
+            grid-column: 1/22;
+            grid-row: 11/12;
+            background-color: #FFB5B0;
+            display: grid;
+            color: #ffffff;
+            font-size: 200%;
+            padding: 10px;
+        }
+        footer p{
+            align-self: center;
+            justify-self: center;
+        }
+        #login_feald{
+            grid-column: 11/22;
+            grid-row: 1/4;
+            background-color: #ffffffbb;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            align-items: center;
+            justify-items: center;
+            padding: 20px;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    <div id="title_my">my</div>
+    <div id="title_muse">muse</div>
+
+    <div id="login_feald">        
+        <a href="{% url 'login_create' %}">新規作成</a>        
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">ユーザー名:</label>
+            <input type="text" id="username" name="username">
+            <br>
+            <label for="userpassword">パスワード教えろ:</label>
+            <input type="password" id="userpassword" name="password">
+            <br>
+            <button type="submit">決定</button>
+        </form>
+    </div>
+
+
+    <div id="sumple_photo">
+        <img class="sumples" src="{{ MEDIA_URL }}/sumple1.jpg" alt="sumple1">
+        <img class="sumples" src="{{ MEDIA_URL }}/sumple2.jpg" alt="sumple2">
+        <img class="sumples" src="{{ MEDIA_URL }}/sumple3.jpg" alt="sumple3">
+        <img class="sumples" src="{{ MEDIA_URL }}/sumple4.jpg" alt="sumple4">
+    </div>
+
+    <div id="left_move"><</div>
+    <div id="right_move">></div>
+
+
+    <div id="explaination">
+        <div id="ex_text">
+            <div id="ex_text_title">あなただけの美術館を作ろう</div>
+            <div id="ex_text_text">
+このサイトは、自分の写真をアップロードして、自分だけのバーチャル美術館を作ることができます。
+
+このサイトですること
+1 写真追加ボタンを押す
+2 タイトルの入力と写真のアップロードをする
+3 それぞれのイベントごとにタグをつける。大きなイベントの場合は「r」のタグ、普段の写真の場合は「s」のタグをつける。
+4 写真番号で、表示する順番を決める
+
+登録が終わったらメタクエストでアプリを立ち上げるだけ！
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>team shirohata</p>
+    </footer>
+    {% endblock %}
+    <script>
+        function smoothScroll(element, direction, distance, duration) {
+            const start = element.scrollLeft;
+            const startTime = performance.now();
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1); // Ensure progress does not exceed 1
+                const easeInOutQuad = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress; // Easing function
+
+                element.scrollLeft = start + direction * distance * easeInOutQuad;
+
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        document.getElementById("left_move").addEventListener("click", function() {
+            smoothScroll(document.getElementById("sumple_photo"), -1, 400, 500); // Scroll left by 400px over 500ms
+        });
+
+        document.getElementById("right_move").addEventListener("click", function() {
+            smoothScroll(document.getElementById("sumple_photo"), 1, 400, 500); // Scroll right by 400px over 500ms
+        });
+    </script>
+</body>
+</html>
