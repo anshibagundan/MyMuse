@@ -29,6 +29,16 @@ jobs:
           pip install -r requirements.txt
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Install gettext
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext
+          
+      - name: Compile Django bytecode  
+        run: |
+          python manage.py compilemessages
+          python manage.py collectstatic --no-input
+          
       - name: Compile Django bytecode
         run: python manage.py compilemessages && python manage.py collectstatic --no-input
       
