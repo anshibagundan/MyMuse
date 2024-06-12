@@ -170,7 +170,7 @@ public class MakeMyMuseum : MonoBehaviour
                 Debug.Log(current.photoNum_);
                 //タイトル
                 float titleHeight = current.height_/(current.width_ + current.height_)* 10 / 2 + 2;
-                Vector3 titlePos = new Vector3(0,titleHeight,0);
+                Vector3 titlePos = new Vector3(0.1f,titleHeight,0);
                 GameObject titleInstance = Instantiate(canvasTitle, position + exhibitStart -  titlePos, Quaternion.Euler(0, 90, 0));
                 TextMeshProUGUI titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
                 titleText.text = current.title_;
