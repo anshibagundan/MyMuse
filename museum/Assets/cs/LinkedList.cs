@@ -55,7 +55,6 @@ public class LinkedList{
 
     //最初のLinkedPhotoを引き渡す
     public LinkedPhoto First(){
-       
         return first_;
     }
    
@@ -73,6 +72,23 @@ public class LinkedList{
         }
     }
 
+    //photoNumから今のリストを検索する
+    public LinkedPhoto Search(int photo_num){
+        LinkedPhoto current = this.First();
+
+        while(current != null){
+            if(current.photoNum_ == photo_num){
+                break;
+            }
+            else{
+                current = current.NextPhoto;
+            }
+        }
+
+        return current;
+    }
+
+    //廊下か部屋かの判定
     public void SorR(List<string> list){
         LinkedPhoto current = first_;
         while(current != null){

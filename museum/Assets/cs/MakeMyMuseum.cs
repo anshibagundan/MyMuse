@@ -174,6 +174,16 @@ public class MakeMyMuseum : MonoBehaviour
                 GameObject titleInstance = Instantiate(canvasTitle, position + exhibitStart -  titlePos, Quaternion.Euler(0, 90, 0));
                 TextMeshProUGUI titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
                 titleText.text = current.title_;
+                //詳細表示
+                Transform detailsPanel = titleInstance.transform.Find("DetailsPanel");
+                TextMeshProUGUI detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
+                detailsText.text = "『" + current.title_ + "』";
+                TextMeshProUGUI dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
+                dateText.text = current.time_;
+                TextMeshProUGUI titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
+                titleTextfotDetail.text = current.detailedTitle_;
+                detailsPanel.gameObject.SetActive(false);
+
 
                 i++;
                 exhibitNum++;
@@ -187,10 +197,18 @@ public class MakeMyMuseum : MonoBehaviour
                     Vector3 exhibitPosition = position + exhibitStart + exhibitNum * exhibitOffset;
                     current.SetUp(exhibitPosition, rot);
                     //タイトル
-                    titleHeight = current.height_/(current.width_ + current.height_)* 10 / 2 + 2;
                     titleInstance = Instantiate(canvasTitle, exhibitPosition -  titlePos, Quaternion.Euler(0, 90, 0));
                     titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
                     titleText.text = current.title_;
+                    //詳細表示
+                    detailsPanel = titleInstance.transform.Find("DetailsPanel");
+                    detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
+                    detailsText.text = "『" + current.title_ + "』";
+                    dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
+                    dateText.text = current.time_;
+                    titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
+                    titleTextfotDetail.text = current.detailedTitle_;
+                    detailsPanel.gameObject.SetActive(false);
             
                     i++;
                     exhibitNum++;
@@ -222,6 +240,15 @@ public class MakeMyMuseum : MonoBehaviour
                 GameObject titleInstance = Instantiate(canvasTitle, roomPhotoPos[exhibitNum] + position -  titlePos, titleRot);
                 TextMeshProUGUI titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
                 titleText.text = current.title_;
+                //詳細表示
+                Transform detailsPanel = titleInstance.transform.Find("DetailsPanel");
+                TextMeshProUGUI detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
+                detailsText.text = "『" + current.title_ + "』";
+                TextMeshProUGUI dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
+                dateText.text = current.time_;
+                TextMeshProUGUI titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
+                titleTextfotDetail.text = current.detailedTitle_;
+                detailsPanel.gameObject.SetActive(false);
 
                 exhibitNum++;
                 i++;
@@ -245,7 +272,15 @@ public class MakeMyMuseum : MonoBehaviour
                         titleInstance = Instantiate(canvasTitle, roomPhotoPos[exhibitNum] + position -  titlePos, titleRot);
                         titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
                         titleText.text = current.title_;
-
+                        //詳細表示
+                        detailsPanel = titleInstance.transform.Find("DetailsPanel");
+                        detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
+                        detailsText.text = "『" + current.title_ + "』";
+                        dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
+                        dateText.text = current.time_;
+                        titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
+                        titleTextfotDetail.text = current.detailedTitle_;
+                        detailsPanel.gameObject.SetActive(false);
                     }
 
                     i++;

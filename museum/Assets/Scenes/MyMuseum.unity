@@ -10738,6 +10738,7 @@ GameObject:
   - component: {fileID: 2014054452}
   - component: {fileID: 2014054453}
   - component: {fileID: 2014054454}
+  - component: {fileID: 2014054455}
   m_Layer: 0
   m_Name: MakeStreet
   m_TagString: Untagged
@@ -10823,7 +10824,23 @@ MonoBehaviour:
   streetPrefab: {fileID: 6498600967376705261, guid: ee32781bfbd164aac800b05d1901e81d, type: 3}
   roomPrefab: {fileID: 5130473605737306294, guid: 616f5f9494c1446fc9615e89228d7248, type: 3}
   exhibitPrefab: {fileID: 6702624250441575413, guid: bfe2b1ffd3c7f474c986d494e84b6676, type: 3}
-  canvasTitle: {fileID: 0}
+  canvasTitle: {fileID: 1613947369271650601, guid: 389fc329e12834af49cb919b58631bf9, type: 3}
+--- !u!114 &2014054455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014054449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6fefccd91254349ad6430647e84126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streetPrefab: {fileID: 6498600967376705261, guid: ee32781bfbd164aac800b05d1901e81d, type: 3}
+  roomPrefab: {fileID: 5130473605737306294, guid: 616f5f9494c1446fc9615e89228d7248, type: 3}
+  exhibitPrefab: {fileID: 6702624250441575413, guid: bfe2b1ffd3c7f474c986d494e84b6676, type: 3}
+  canvasTitle: {fileID: 1613947369271650601, guid: 389fc329e12834af49cb919b58631bf9, type: 3}
 --- !u!1 &2018003520
 GameObject:
   m_ObjectHideFlags: 0
