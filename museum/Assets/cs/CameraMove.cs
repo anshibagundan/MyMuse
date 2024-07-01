@@ -48,7 +48,7 @@ public class CameraMove : MonoBehaviour
         Vector3 moveAmount = moveDirection * moveSpeed * Time.deltaTime;
 
         // 動く方向にものがあるかを判定
-        if (IsCollisionAhead(moveAmount, minDistance))
+        if (IsCollisionAhead(moveAmount, minDistance) || ToRoom.isEnterPicture || ToStreet.isToStreet)
         {
             // 衝突がある場合、移動をキャンセル
             moveAmount = Vector3.zero;
