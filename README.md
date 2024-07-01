@@ -39,9 +39,6 @@ https://youtu.be/I3AjpXDCTGw
 - Django
 - PostgreSQL
 - Blender
-
-## 注意
-現在それぞれのコードはdevelopmentブランチにあります
             
 
 
