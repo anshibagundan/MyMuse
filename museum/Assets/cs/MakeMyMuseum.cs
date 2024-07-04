@@ -6,15 +6,13 @@ using UnityEngine.Networking;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using TMPro;
-using UnityEngine.UI;
 
 public class MakeMyMuseum : MonoBehaviour
 {
     private List<string> v = new List<string>{};//s1,s2,...は廊下でに1,r1,r1,r2,r2,...は部屋に画像を配置する判別リスト
         
-    public GameObject streetPrefab;
-    public GameObject roomPrefab;
+    public GameObject streetPrefab; 
+    public GameObject roomPrefab; 
     private Vector3 startPosition = new Vector3(0, 0, 50); // 開始位置
     private Vector3 positionOffset = new Vector3(0, 0, 50); // 各インスタンスの位置オフセット
     
@@ -23,7 +21,6 @@ public class MakeMyMuseum : MonoBehaviour
     public GameObject exhibitPrefab;  // スペルミス修正
     Quaternion rot =Quaternion.Euler(0,90,180);//exhibitPrefabを回転すさせる
     float padding = 5;
-    public GameObject canvasTitle;//タイトル（ボタン）
     
     private Vector3 exhibitStart = new Vector3(10, 10, -15); // 開始位置
     private Vector3 exhibitOffset = new Vector3(0, 0, 10); // 各インスタンスの位置オフセット
@@ -63,6 +60,8 @@ public class MakeMyMuseum : MonoBehaviour
        await extractionDB();//データを抽出して画像をLinkedListに挿入
        photoList.SorR(v);//廊下か部屋かの判別用リストに情報を入れる
        MuseumMaker();//内装づくり&配置
+       
+        
     }
 
     async Task extractionDB(){
@@ -71,6 +70,8 @@ public class MakeMyMuseum : MonoBehaviour
         string rootUrl = "https://vr-museum-6034ae04d19d.herokuapp.com";//画像貼り付け用のurl
 
         List<MyData> myData = await FetchData(url);//DBから取得する
+
+        
 
         //exhibitPrefabに画像を貼り付け、双方向リストに挿入する。
         if(myData != null){
@@ -98,8 +99,9 @@ public class MakeMyMuseum : MonoBehaviour
                 UnityWebRequest www = UnityWebRequestTexture.GetTexture(imageUrl);//テクスチャを取得するためのオブジェクト
                 var asyncOperation = www.SendWebRequest();//HTTPリクエストの送信
                 asyncOperation.completed += (op) =>{//HTTPリクエストの完了したとき、テクスチャを取得する
+        
                     if (www.result == UnityWebRequest.Result.Success){//リクエストが成功した時
-                        Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                        Texture2D texture = ((DownloadHandlerTexture)www.downloadHandler).texture;       
                         exhibitPrefabInstance.GetComponent<Renderer>().material.mainTexture = texture;//取得したテクスチャをexhibitPrefabのテクスチャとする
                     }
                     else{
@@ -110,7 +112,8 @@ public class MakeMyMuseum : MonoBehaviour
                 exhibitPrefabInstance.SetActive(false);//オブジェクトの非表示
 
                 photoList.Append(data.title, data.detailed_title, data.time, exhibitPrefabInstance, height, width, data.tag, data.photo_num);
-            }
+            }  
+            
         }
 
     }
@@ -168,23 +171,7 @@ public class MakeMyMuseum : MonoBehaviour
                 // 写真
                 current.SetUp(position + exhibitStart,rot);
                 Debug.Log(current.photoNum_);
-                //タイトル
-                float titleHeight = current.height_/(current.width_ + current.height_)* 10 / 2 + 2;
-                Vector3 titlePos = new Vector3(0.1f,titleHeight,0);
-                GameObject titleInstance = Instantiate(canvasTitle, position + exhibitStart -  titlePos, Quaternion.Euler(0, 90, 0));
-                TextMeshProUGUI titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
-                titleText.text = current.title_;
-                //詳細表示
-                Transform detailsPanel = titleInstance.transform.Find("DetailsPanel");
-                TextMeshProUGUI detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
-                detailsText.text = "『" + current.title_ + "』";
-                TextMeshProUGUI dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
-                dateText.text = current.time_;
-                TextMeshProUGUI titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
-                titleTextfotDetail.text = current.detailedTitle_;
-                detailsPanel.gameObject.SetActive(false);
-
-
+                
                 i++;
                 exhibitNum++;
                 //current = current.NextPhoto;
@@ -196,19 +183,6 @@ public class MakeMyMuseum : MonoBehaviour
                     // 写真
                     Vector3 exhibitPosition = position + exhibitStart + exhibitNum * exhibitOffset;
                     current.SetUp(exhibitPosition, rot);
-                    //タイトル
-                    titleInstance = Instantiate(canvasTitle, exhibitPosition -  titlePos, Quaternion.Euler(0, 90, 0));
-                    titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
-                    titleText.text = current.title_;
-                    //詳細表示
-                    detailsPanel = titleInstance.transform.Find("DetailsPanel");
-                    detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
-                    detailsText.text = "『" + current.title_ + "』";
-                    dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
-                    dateText.text = current.time_;
-                    titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
-                    titleTextfotDetail.text = current.detailedTitle_;
-                    detailsPanel.gameObject.SetActive(false);
             
                     i++;
                     exhibitNum++;
@@ -233,22 +207,7 @@ public class MakeMyMuseum : MonoBehaviour
                 // 写真
                 Quaternion rotation = Quaternion.Euler(roomPhotoRote[exhibitNum]);
                 current.SetUp(roomPhotoPos[exhibitNum] + position, rotation);
-                //タイトル
-                float titleHeight = current.height_/(current.width_ + current.height_)* 10 / 2 + 3;
-                Vector3 titlePos = new Vector3(0,titleHeight,0);
-                Quaternion titleRot = Quaternion.Euler(roomPhotoRote[exhibitNum] -new Vector3(0,0,180));
-                GameObject titleInstance = Instantiate(canvasTitle, roomPhotoPos[exhibitNum] + position -  titlePos, titleRot);
-                TextMeshProUGUI titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
-                titleText.text = current.title_;
-                //詳細表示
-                Transform detailsPanel = titleInstance.transform.Find("DetailsPanel");
-                TextMeshProUGUI detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
-                detailsText.text = "『" + current.title_ + "』";
-                TextMeshProUGUI dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
-                dateText.text = current.time_;
-                TextMeshProUGUI titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
-                titleTextfotDetail.text = current.detailedTitle_;
-                detailsPanel.gameObject.SetActive(false);
+                
 
                 exhibitNum++;
                 i++;
@@ -265,33 +224,24 @@ public class MakeMyMuseum : MonoBehaviour
                         // 写真
                         rotation = Quaternion.Euler(roomPhotoRote[exhibitNum]);
                         current.SetUp(roomPhotoPos[exhibitNum] + position, rotation);
-                        //タイトル
-                        titleHeight = current.height_/(current.width_ + current.height_)* 10 / 2 + 3;
-                        titlePos = new Vector3(0,titleHeight,0);
-                        titleRot = Quaternion.Euler(roomPhotoRote[exhibitNum] -new Vector3(0,0,180));
-                        titleInstance = Instantiate(canvasTitle, roomPhotoPos[exhibitNum] + position -  titlePos, titleRot);
-                        titleText = titleInstance.GetComponentInChildren<Button>().GetComponentInChildren<TextMeshProUGUI>();
-                        titleText.text = current.title_;
-                        //詳細表示
-                        detailsPanel = titleInstance.transform.Find("DetailsPanel");
-                        detailsText = detailsPanel.Find("TitleforDetail").GetComponent<TextMeshProUGUI>();
-                        detailsText.text = "『" + current.title_ + "』";
-                        dateText = detailsPanel.Find("Date").GetComponent<TextMeshProUGUI>();
-                        dateText.text = current.time_;
-                        titleTextfotDetail = detailsPanel.Find("Details").GetComponent<TextMeshProUGUI>();
-                        titleTextfotDetail.text = current.detailedTitle_;
-                        detailsPanel.gameObject.SetActive(false);
+
                     }
 
                     i++;
                     exhibitNum++;
                     
                 }
+                
+
 
                 exhibitNum = 0;
                 
                 current = current.NextPhoto;
             }
+            
+            
         }
     }
+    
+    
 }

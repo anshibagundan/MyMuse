@@ -9,6 +9,7 @@ public class ExihibitMaker : MonoBehaviour
     private Vector3 leftsidePosition = new Vector3(-10, 5, -12);
     private Vector3 leftsideRotation = new Vector3(0, 180, 0);
     
+    
     void Start()
     {
         for (int i = 0; i < ExihibitNum; i++)

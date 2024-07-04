@@ -10,68 +10,79 @@ using System.Text;
 using TMPro;
 using Newtonsoft.Json;
 
-
 public class LogIn : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    //ボタンを押すとDBにusernameとpasswordが送信される。そこでpasswordが一致するかを判定して返す
-    //認証が成功したら次のシーンに移る。
-
     public Button button;
-
-    //Unity用のユーザ名とパスワード
     public TMP_InputField inputUserName;
     public TMP_InputField inputPassword;
-    
-    //DV送信用
-    public MyData mydata = new MyData();//Post用にJSONを作成
-    private static readonly HttpClient client = new HttpClient();//HTTPリクエストを送信し、HTTPレスポンスを受信するためのクラス
-    
-    public async void OnClick(){
-        SceneManager.LoadScene("MyMuseum");
 
-        //ユーザ名とパスワードをテキストフィールドから代入する。
+    private static readonly HttpClient client = new HttpClient();
+
+    public GameObject errorText;
+
+    private TextMeshProUGUI errorTMP;
+
+    void Start()
+    {
+        errorTMP = errorText.GetComponent<TextMeshProUGUI>();
+        errorText.SetActive(false);
+    }
+
+    // この非async関数をボタンのOnClickに割り当てる
+    public void OnButtonClick()
+    {
+        _ = HandleLoginAsync();
+    }
+
+    private async Task HandleLoginAsync()
+    {
+        // エラーテキストの表示を切り替え
+        errorText.SetActive(true);
+
+        // ユーザ名とパスワードをテキストフィールドから取得
         string userFromU = inputUserName.text;
         string passwordFromU = inputPassword.text;
 
-        //DB上でパスワードが一致するかを判定しbooleanで返す
-        string url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/login/";
-        bool match = await MatchPassword(url, userFromU, passwordFromU);//DBに送信する
+        // デバッグ用: 入力されたユーザ名とパスワードを表示
+        errorTMP.text = $"{userFromU}:{passwordFromU}";
 
-        
-        //入力されたパスワードとデータベースからのパスワードを比較する。
-        if(match){
-            //MyMuseumSceneに切り替え
-            //MyMuseumSceneは美術館生成しているSceneである。
+        // DB上でパスワードが一致するかを判定しJSONレスポンスを処理する
+        string url = "http://127.0.0.1:8000/unity/login/";
+        bool match = await MatchPassword(url, userFromU, passwordFromU);
+
+        // 認証結果に基づいて処理
+        if (match)
+        {
+            // 認証が成功したらシーンを切り替える
             SceneManager.LoadScene("MyMuseum");
         }
-        else{
-            UnityEngine.Debug.Log ("エラーが起きました。");
+        else
+        {
+            //UnityEngine.Debug.Log("認証に失敗しました。");
+            errorTMP.text = "ユーザー名またはパスワードが正しくありません。";
+            errorText.SetActive(true);
         }
-        
-        
     }
 
-    
-
-    //DBからデータ取得する
-    async Task<bool> MatchPassword(string url, string userFromU, string passwordFromU){
-        
-        //JSON作成
+    async Task<bool> MatchPassword(string url, string userFromU, string passwordFromU)
+    {
+        errorTMP.text = "Loading...";
+        // JSON作成
         MyData mydata = new MyData
         {
             username = userFromU,
             password = passwordFromU
         };
         string myJson = JsonConvert.SerializeObject(mydata);
-        StringContent content = new StringContent(myJson, Encoding.UTF8, "application/json");//HTTPリクエス用stringに変換
-    
-        using (HttpResponseMessage response = await client.PostAsync(url, content)){//HTTPリクエストを送信し、受信する
-            if (response.IsSuccessStatusCode)//レスポンスが正常に取得できた時、データを取得する
+        StringContent content = new StringContent(myJson, Encoding.UTF8, "application/json");
+
+        using (HttpResponseMessage response = await client.PostAsync(url, content))
+        {
+            if (response.IsSuccessStatusCode)
             {
                 string responseData = await response.Content.ReadAsStringAsync();
-                return bool.Parse(responseData);  
+                var result = JsonConvert.DeserializeObject<ResponseData>(responseData);
+                return result.status == "ok";
             }
             else
             {
@@ -82,8 +93,15 @@ public class LogIn : MonoBehaviour
     }
 
     [Serializable]
-    public class MyData{
+    public class MyData
+    {
         public string username;
         public string password;
+    }
+
+    [Serializable]
+    public class ResponseData
+    {
+        public string status;
     }
 }
