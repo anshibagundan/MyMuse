@@ -2022,8 +2022,6 @@ RectTransform:
   - {fileID: 1775077323}
   - {fileID: 1706801972}
   - {fileID: 1271169472}
-
->>>>>>> 6f6e800e4c6a562210b4c1784e89f6f13c8c96a7
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3421,8 +3419,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271169471}
   m_CullTransparentMesh: 1
-=======
->>>>>>> 6f6e800e4c6a562210b4c1784e89f6f13c8c96a7
 --- !u!114 &1272334355 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3485521459009502354, guid: f54012181eacade4ea242c65f804720f, type: 3}
