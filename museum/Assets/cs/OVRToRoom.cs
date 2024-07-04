@@ -8,8 +8,9 @@ public class OVRToRoom : MonoBehaviour
     private Transform centerEyeAnchor;
     private bool canEnterByEyeTrack = false;
 
-    public float minAngle = 80f;
-    public float maxAngle = 100f;
+    private float minAngle = -100f;
+    private float maxAngle = -80f;
+    public int rotationSpeed = 70;
 
     void Start()
     {
@@ -43,7 +44,7 @@ public class OVRToRoom : MonoBehaviour
             }
 
             // 指定範囲内にあるかチェック
-            canEnterByEyeTrack = (yRotation >= -maxAngle && yRotation <= -minAngle);
+            canEnterByEyeTrack = (yRotation >= minAngle && yRotation <= maxAngle);
         }
     }
 
@@ -81,7 +82,7 @@ public class OVRToRoom : MonoBehaviour
         }
         else
         {
-            transform.Rotate(70 * Time.deltaTime, 0, 0);
+            transform.Rotate(rotationSpeed * Time.deltaTime, 0, 0);
             transform.position += new Vector3(-0.005f, 0.004f, 0);
         }
     }

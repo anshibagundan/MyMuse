@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 7cd749ec-eac6-4c88-a309-a0efd4cfc13a
+  instanceId: 9669355d-1968-4517-8b3f-58ce14a77886
   version: 1
 --- !u!114 &3102378924369847532
 MonoBehaviour:
@@ -4741,7 +4741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 1646965d-72f3-4253-8f98-bbc57b420ee9
+  instanceId: 7a2075e1-e80e-405d-9363-a8ca84e7cdfb
   version: 1
 --- !u!114 &6988752767333480009
 MonoBehaviour:
@@ -6535,7 +6535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 68dfbd68-a030-4d02-9eb2-3cc36d5e447e
+  instanceId: 6e2e16f0-989a-488b-baf7-77ee3da3bd2f
   version: 1
 --- !u!114 &6622512222746056004
 MonoBehaviour:
@@ -10105,7 +10105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 0d1882a8-dd82-4443-9128-08d3e5da24e9
+  instanceId: b9ef10b3-a212-4d47-acd1-0121bb13c8b6
   version: 1
 --- !u!114 &2315933596972238598
 MonoBehaviour:
@@ -11315,7 +11315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: ef76a28d-a3ca-42ca-a261-0b5d7001c18b
+  instanceId: 0d6c40d5-d130-40f0-bfe1-eb3c364e1394
   version: 1
 --- !u!114 &3762449848473214928
 MonoBehaviour:
@@ -11360,8 +11360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ovrCameraRig: {fileID: 2397437536370522811}
-  minAngle: 80
-  maxAngle: 100
+  rotationSpeed: 80
 --- !u!114 &8159053986062192320
 MonoBehaviour:
   m_ObjectHideFlags: 0

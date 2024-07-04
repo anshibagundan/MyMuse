@@ -175,6 +175,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MergeOkPre
       objectReference: {fileID: 0}
+    - target: {fileID: 6882733266581629967, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: rotationSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571953630286376995, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fb4525019350e4131b89ebc7149521aa, type: 2}
+    - target: {fileID: 8571953630286376995, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

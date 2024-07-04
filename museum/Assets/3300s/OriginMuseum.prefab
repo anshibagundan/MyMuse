@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 68dfbd68-a030-4d02-9eb2-3cc36d5e447e
+  instanceId: c9ab16f7-7db6-434b-9377-4b12931e934c
   version: 1
 --- !u!114 &7018442773620344889
 MonoBehaviour:
@@ -9682,7 +9682,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u307F\u3089\u3044"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fb4525019350e4131b89ebc7149521aa, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -9746,7 +9746,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &7839138062785548104
@@ -10531,7 +10531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 1646965d-72f3-4253-8f98-bbc57b420ee9
+  instanceId: 1e868806-db4d-433e-9c0c-0b413f5a86f2
   version: 1
 --- !u!114 &1441611244747543757
 MonoBehaviour:
@@ -10872,7 +10872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 7cd749ec-eac6-4c88-a309-a0efd4cfc13a
+  instanceId: ae66562b-405f-4d8e-a4b8-097505b71cf5
   version: 1
 --- !u!114 &2029032317532067647
 MonoBehaviour:
@@ -10956,7 +10956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 0d1882a8-dd82-4443-9128-08d3e5da24e9
+  instanceId: 28edac28-1c1a-46be-bf7c-b28037d66880
   version: 1
 --- !u!114 &273771689099274425
 MonoBehaviour:
@@ -11921,7 +11921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: ef76a28d-a3ca-42ca-a261-0b5d7001c18b
+  instanceId: 616cfdf1-9c60-482c-8157-321f6f814ede
   version: 1
 --- !u!114 &5868659910161683728
 MonoBehaviour:
