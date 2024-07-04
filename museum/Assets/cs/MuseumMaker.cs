@@ -5,13 +5,26 @@ public class MuseumMaker : MonoBehaviour
 {
     public List<string> v = new List<string> { "S", "S", "S", "S", "S", "R", "R", "R", "R", "R", "R","R", "R", "R", "R1", "R1", "S", "S", "R2" };
 
+    //部屋関連
+    private Dictionary<string, GameObject> roomKind_PrefabDict = new Dictionary<string, GameObject>();
+    private List<string> roomKindList = new List<string> { "normal","spring","summer","autumn","winter"};
+
+    private Dictionary<string, string> roomName_KindDict = new Dictionary<string, string>{
+        {"R1","normal"},
+        {"R2","spring"},
+        {"R3","summer"},
+        {"R4","autumn"},
+        {"R5","winter"}
+    };
+
     public GameObject streetPrefab;
-    public GameObject roomPrefab;
+    private GameObject roomPrefab;
+    public List<GameObject> roomList = new List<GameObject>();
     private Vector3 startPosition = new Vector3(0, 0, 50); // 開始位置
     private Vector3 positionOffset = new Vector3(0, 0, 50); // 各インスタンスの位置オフセット
 
     //写真関連
-    public GameObject exhibitPrefab;  // スペルミス修正
+    public GameObject exhibitPrefab;
 
     private Vector3 exhibitStart = new Vector3(8, 10, -15); // 開始位置
     private Vector3 exhibitOffset = new Vector3(0, 0, 10); // 各インスタンスの位置オフセット
@@ -48,6 +61,23 @@ public class MuseumMaker : MonoBehaviour
 
     void Start()
     {
+        // 部屋の名前とプレハブの辞書を作成
+        for (int i = 0; i < roomKindList.Count; i++)
+        {
+            roomKind_PrefabDict.Add(roomKindList[i], roomList[i]);
+        }
+
+        // // 部屋の名前と種類の辞書を作成
+        // for (int i = 0; i < roomKindList.Count; i++)
+        // {
+        //     roomName_KindDict.Add("R" + i+1, roomKindList[i]);
+
+        //     //ここは本当は
+        //     //roomName_KindDict.Add(v[i].name, v[i].kind);
+        // }
+
+
+
         int exhibitNum = 0;
         string roomName;
 
@@ -82,6 +112,12 @@ public class MuseumMaker : MonoBehaviour
             else
             {
                 roomName = v[i];
+                if(!roomName_KindDict.ContainsKey(roomName))
+                {
+                    roomPrefab = roomList[0];
+                }else{
+                    roomPrefab = roomKind_PrefabDict[roomName_KindDict[roomName]];
+                }
                 // 通路
                 Vector3 position = startPosition + streetNum * positionOffset;
                 GameObject parentInstance = Instantiate(roomPrefab, position, Quaternion.identity);
