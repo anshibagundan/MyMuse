@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class MuseumMaker : MonoBehaviour
 {
-    private List<string> v = new List<string> { "S", "S", "S", "S", "S", "R", "R", "R", "R", "R", "R","R", "R", "R", "R1", "R1", "S", "S", "R2" };
-        
-    public GameObject streetPrefab; 
-    public GameObject roomPrefab; 
+    public List<string> v = new List<string> { "S", "S", "S", "S", "S", "R", "R", "R", "R", "R", "R","R", "R", "R", "R1", "R1", "S", "S", "R2" };
+
+    public GameObject streetPrefab;
+    public GameObject roomPrefab;
     private Vector3 startPosition = new Vector3(0, 0, 50); // 開始位置
     private Vector3 positionOffset = new Vector3(0, 0, 50); // 各インスタンスの位置オフセット
-    
+
     //写真関連
     public GameObject exhibitPrefab;  // スペルミス修正
-    
+
     private Vector3 exhibitStart = new Vector3(8, 10, -15); // 開始位置
     private Vector3 exhibitOffset = new Vector3(0, 0, 10); // 各インスタンスの位置オフセット
     private Vector3 leftsidePosition = new Vector3(-10, 10, -12);
     private Vector3 leftsideRotation = new Vector3(0, 180, 0);
-    
+
     public static int streetNum = 0;
 
     private List<Vector3> roomPhotoPos = new List<Vector3>
@@ -32,7 +32,7 @@ public class MuseumMaker : MonoBehaviour
         new Vector3(-50, 10 , -18),//8
         new Vector3(-50, 10 , 18)//9
     };
-    
+
     private List<Vector3> roomPhotoRote = new List<Vector3>
     {
         new Vector3(0, 180 ,0),//1

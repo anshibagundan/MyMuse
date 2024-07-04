@@ -54,6 +54,11 @@ public class CameraMove : MonoBehaviour
             moveAmount = Vector3.zero;
         }
 
+        if(OVRToStreet.isToStreet || OVRToRoom.isEnterPicture)
+        {
+            moveAmount = Vector3.zero;
+        }
+
         // OVRCameraRigの位置を更新
         ovrCameraRig.transform.position += moveAmount;
     }
