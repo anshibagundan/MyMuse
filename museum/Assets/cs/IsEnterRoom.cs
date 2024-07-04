@@ -9,17 +9,16 @@ public class IsEnterRoom : MonoBehaviour
     private string roomName;
     private TextMeshPro nameText;
     private TMP_CharacterInfo[] charInfos;
-
-    private bool isUnShow = false;
+    public float wordWaitTime = 0.1f;
+    public RoomLeftUp roomLeftUp;
 
     void Start()
     {
+        //roomLeftUp = GameObject.Find("RoomName2").GetComponent<RoomLeftUp>();
         // 制御設定
         nameText = this.GetComponent<TextMeshPro>();
         roomName = "Sports Day";
         nameText.text = roomName;
-
-        // 初期設定
         nameText.ForceMeshUpdate(true);
         charInfos = nameText.textInfo.characterInfo;
         for (var i = 0; i < charInfos.Length; i++) // 全ての文字を透明化
@@ -40,7 +39,7 @@ public class IsEnterRoom : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
 
             float alpha = 0.0f;
-            float FadeSpeed = 3.0f;
+            float FadeSpeed = 5.0f;
 
             while (true)
             {
@@ -56,7 +55,7 @@ public class IsEnterRoom : MonoBehaviour
                 if (alpha >= 1.0f){
                     if(i == charInfos.Length-1){
                         StopCoroutine(GraduallyShow());
-                        Invoke( "UnShow", 2.0f );
+                        Invoke( "UnShow", 0.5f );
                     }
                     break;
                 }
@@ -66,32 +65,25 @@ public class IsEnterRoom : MonoBehaviour
 
     private IEnumerator GraduallyUnShow()
     {
-        for (var i = charInfos.Length-1; i >= 0; i--)
-        {
-            if (char.IsWhiteSpace(charInfos[i].character)) continue;
-            // 一文字ごとに0.1秒待機
-            yield return new WaitForSeconds(0.1f);
+		float alpha = 1.0f;
+		var colortemp = nameText.color;
+        float FadeSpeed = 5.0f;
 
-            float alpha = 1.0f;
-            float FadeSpeed = 3.0f;
+		while (true)
+		{
+            yield return new WaitForFixedUpdate();
 
-            while (true)
-            {
-                // FixedUpdateのタイミングまで待つ
-                yield return new WaitForFixedUpdate();
+            float alphaDelta = FadeSpeed * Time.fixedDeltaTime;
+			nameText.color = new Color(colortemp.r, colortemp.g, colortemp.b, alpha);
+			alpha = Mathf.Min(alpha - alphaDelta, 0.5f);
 
-                float alphaDelta = FadeSpeed * Time.fixedDeltaTime;
-                alpha = Mathf.Min(alpha - alphaDelta, 1.0f);
-                SetTextAlpha(i, (byte)(255 * alpha));
-
-                if (alpha <= 0.0f){
-                    if(i == charInfos.Length-1){
-                        StopCoroutine(GraduallyUnShow());
-                    }
-                    break;
-                }
-            }
-        }
+			if (alpha <= 0.0f)
+			{
+                StopCoroutine(GraduallyUnShow());
+                roomLeftUp.isShow();
+				break;
+			}
+		}
     }
 
     private void UnShow(){
