@@ -81,7 +81,7 @@ public class OVRToRoom : MonoBehaviour
         }
         else
         {
-            transform.Rotate(0, 0, 70 * Time.deltaTime);
+            transform.Rotate(70 * Time.deltaTime, 0, 0);
             transform.position += new Vector3(-0.005f, 0.004f, 0);
         }
     }
