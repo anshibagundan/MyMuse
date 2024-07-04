@@ -17,7 +17,7 @@ public class LogIn : MonoBehaviour
     public TMP_InputField inputPassword;
 
     private static readonly HttpClient client = new HttpClient();
-
+    
     public GameObject errorText;
 
     private TextMeshProUGUI errorTMP;
@@ -38,19 +38,20 @@ public class LogIn : MonoBehaviour
     {
         // エラーテキストの表示を切り替え
         errorText.SetActive(true);
-
+        
         // ユーザ名とパスワードをテキストフィールドから取得
         string userFromU = inputUserName.text;
         string passwordFromU = inputPassword.text;
-
+        
         // デバッグ用: 入力されたユーザ名とパスワードを表示
         errorTMP.text = $"{userFromU}:{passwordFromU}";
+
 
         // DB上でパスワードが一致するかを判定しJSONレスポンスを処理する
         string url = "http://127.0.0.1:8000/unity/login/";
         bool match = await MatchPassword(url, userFromU, passwordFromU);
 
-        // 認証結果に基づいて処理
+        // 入力されたパスワードとデータベースのパスワードを比較
         if (match)
         {
             // 認証が成功したらシーンを切り替える
@@ -61,12 +62,14 @@ public class LogIn : MonoBehaviour
             //UnityEngine.Debug.Log("認証に失敗しました。");
             errorTMP.text = "ユーザー名またはパスワードが正しくありません。";
             errorText.SetActive(true);
+            UnityEngine.Debug.Log("エラーが起きました。");
         }
     }
 
     async Task<bool> MatchPassword(string url, string userFromU, string passwordFromU)
     {
         errorTMP.text = "Loading...";
+
         // JSON作成
         MyData mydata = new MyData
         {
