@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 
 class Photo(models.Model):
@@ -14,10 +15,13 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+
 class Tag(models.Model):
     tag = models.CharField(max_length=20)
     user = models.CharField(max_length=20)
-    
+    name = models.CharField(max_length=20)
+    room_kinds = models.CharField(max_length=20)
+
     def __str__(self):
         return self.tag

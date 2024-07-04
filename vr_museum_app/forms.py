@@ -1,6 +1,4 @@
 from django import forms
-from django.core.validators import MaxValueValidator, MinValueValidator
-
 from .models import Photo, Tag
 
 
@@ -31,12 +29,27 @@ class PhotoForm(forms.ModelForm):
             tag_choices = [(tag.tag, tag.tag) for tag in Tag.objects.filter(user=user)]
             self.fields['tag'].choices = tag_choices
 
+
 class TagForm(forms.ModelForm):
+
+    ROOM_CHOICES = [
+        ('ノーマル', 'ノーマル'),
+        ('春', '春'),
+        ('夏', '夏'),
+        ('秋', '秋'),
+        ('冬', '冬'),
+    ]
+
+    name = forms.CharField(max_length=20, label='Tag Name')
+    room_kinds = forms.ChoiceField(choices=ROOM_CHOICES, label='Room Kind')
+
     class Meta:
         model = Tag
-        fields = ('tag',)
+        fields = ('tag','name','room_kinds')
         widgets = {
             'tag': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'room_kinds': forms.Select(attrs={'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -44,14 +57,14 @@ class TagForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         # r タグの個数を取得
-        r_count = Tag.objects.filter(tag__startswith='r', user=username).count() + 1
+        r_count = Tag.objects.filter(tag__startswith='部屋', user=username).count() + 1
         # s タグの個数を取得
-        s_count = Tag.objects.filter(tag__startswith='s', user=username).count() + 1
+        s_count = Tag.objects.filter(tag__startswith='通路', user=username).count() + 1
 
         # 選択肢を動的に設定する
         choices = [
-            ('r{}'.format(r_count), 'r{}'.format(r_count)),
-            ('s{}'.format(s_count), 's{}'.format(s_count)),
+            ('部屋{}'.format(r_count), '部屋{}'.format(r_count)),
+            ('通路{}'.format(s_count), '通路{}'.format(s_count)),
         ]
         # tag フィールドの選択肢を更新する
         self.fields['tag'].widget = forms.Select(
@@ -59,14 +72,17 @@ class TagForm(forms.ModelForm):
             attrs={'class': 'form-control'}
         )
 
-class TagForm_delete(forms.ModelForm):
+
+class TagFormDelete(forms.ModelForm):
     tag = forms.ModelChoiceField(queryset=Tag.objects.none(), required=True, label='Tag', widget=forms.Select(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Tag
         fields = ('tag',)
         widgets = {
             'tag': forms.CheckboxSelectMultiple(),  # チェックボックスを使用する
         }
+
     def __init__(self, *args, **kwargs):
         username = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
