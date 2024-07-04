@@ -3417,6 +3417,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &708287978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 708287981}
+  - component: {fileID: 708287980}
+  - component: {fileID: 708287979}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &708287979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708287978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &708287980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708287978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &708287981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708287978}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &711832230
 GameObject:
   m_ObjectHideFlags: 0
@@ -10670,6 +10738,7 @@ GameObject:
   - component: {fileID: 2014054452}
   - component: {fileID: 2014054453}
   - component: {fileID: 2014054454}
+  - component: {fileID: 2014054455}
   m_Layer: 0
   m_Name: MakeStreet
   m_TagString: Untagged
@@ -10732,7 +10801,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014054449}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30dfec30aa75f42059e5556ffef1513a, type: 3}
   m_Name: 
@@ -10755,6 +10824,23 @@ MonoBehaviour:
   streetPrefab: {fileID: 6498600967376705261, guid: ee32781bfbd164aac800b05d1901e81d, type: 3}
   roomPrefab: {fileID: 5130473605737306294, guid: 616f5f9494c1446fc9615e89228d7248, type: 3}
   exhibitPrefab: {fileID: 6702624250441575413, guid: bfe2b1ffd3c7f474c986d494e84b6676, type: 3}
+  canvasTitle: {fileID: 1613947369271650601, guid: 389fc329e12834af49cb919b58631bf9, type: 3}
+--- !u!114 &2014054455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014054449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6fefccd91254349ad6430647e84126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  streetPrefab: {fileID: 6498600967376705261, guid: ee32781bfbd164aac800b05d1901e81d, type: 3}
+  roomPrefab: {fileID: 5130473605737306294, guid: 616f5f9494c1446fc9615e89228d7248, type: 3}
+  exhibitPrefab: {fileID: 6702624250441575413, guid: bfe2b1ffd3c7f474c986d494e84b6676, type: 3}
+  canvasTitle: {fileID: 1613947369271650601, guid: 389fc329e12834af49cb919b58631bf9, type: 3}
 --- !u!1 &2018003520
 GameObject:
   m_ObjectHideFlags: 0
@@ -11203,8 +11289,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u307F\u3089\u3044"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: fb4525019350e4131b89ebc7149521aa, type: 2}
-  m_sharedMaterial: {fileID: -2374182707473134840, guid: fb4525019350e4131b89ebc7149521aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -12071,3 +12157,4 @@ SceneRoots:
   - {fileID: 1937413164}
   - {fileID: 1619955187}
   - {fileID: 1972072306}
+  - {fileID: 708287981}
