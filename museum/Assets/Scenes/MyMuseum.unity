@@ -198,24 +198,40 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1794752348833602286, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2013693742347659340, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5712059471328084049, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: roomList.Array.size
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: roomList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1080613331599364309, guid: 69de64e8eab1a4ab48eef2d27fe5a046, type: 3}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: roomList.Array.data[1]
+      value: 
+      objectReference: {fileID: 2822334190806265925, guid: 4e9f0305d86c34a8e835d5b29eabc84e, type: 3}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: roomList.Array.data[2]
+      value: 
+      objectReference: {fileID: 1640446907243808704, guid: fa018ef4bcc7c42e298fc836fe9b7021, type: 3}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: roomList.Array.data[3]
+      value: 
+      objectReference: {fileID: 8006712288707101021, guid: 11a8506f7c90c4b45a5fd4c3ce11e102, type: 3}
+    - target: {fileID: 4945084568814336705, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: roomList.Array.data[4]
+      value: 
+      objectReference: {fileID: 3223356798038782736, guid: e876909e9c32643759fefcf7ba474889, type: 3}
     - target: {fileID: 8124588250458250547, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722853709364917726, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8858644727092728231, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
@@ -257,6 +273,18 @@ PrefabInstance:
     - target: {fileID: 9077601980013027387, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
       propertyPath: m_Name
       value: SeasonPre
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794752348833602286, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013693742347659340, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5712059471328084049, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

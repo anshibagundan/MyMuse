@@ -15,6 +15,7 @@ public class LogIn : MonoBehaviour
     public Button button;
     public TMP_InputField inputUserName;
     public TMP_InputField inputPassword;
+    public static string UserName;
 
     private static readonly HttpClient client = new HttpClient();
 
@@ -92,6 +93,7 @@ public class LogIn : MonoBehaviour
             {
                 var result = JsonConvert.DeserializeObject<ResponseData>(responseData);
                 errorTMP.text = "ok";
+                UserName = userFromU;
                 return result.status == "ok";
 
             }

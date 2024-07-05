@@ -16,6 +16,7 @@ public class MakeMyMuseum : MonoBehaviour
         
     public GameObject streetPrefab;
     public GameObject roomPrefab;
+    public List<GameObject> roomList = new List<GameObject>();
     private Vector3 startPosition = new Vector3(0, 0, 50); // 開始位置
     private Vector3 positionOffset = new Vector3(0, 0, 50); // 各インスタンスの位置オフセット
     
@@ -30,7 +31,19 @@ public class MakeMyMuseum : MonoBehaviour
     private Vector3 exhibitOffset = new Vector3(0, 0, 10); // 各インスタンスの位置オフセット
     private Vector3 leftsidePosition = new Vector3(-10, 10, -12);
     private Vector3 leftsideRotation = new Vector3(0, 180, 0);
-    
+
+    //部屋関連
+    private Dictionary<string, GameObject> roomKind_PrefabDict = new Dictionary<string, GameObject>();
+    private List<string> roomKindList = new List<string> { "normal", "spring", "summer", "autumn", "winter" };
+
+    private Dictionary<string, string> roomName_KindDict = new Dictionary<string, string>{
+        {"R1","normal"},
+        {"R2","spring"},
+        {"R3","summer"},
+        {"R4","autumn"},
+        {"R5","winter"}
+    };
+
     public static int streetNum = 0;
 
     private List<Vector3> roomPhotoPos = new List<Vector3>
@@ -63,21 +76,39 @@ public class MakeMyMuseum : MonoBehaviour
     {
        await extractionDB();//データを抽出して画像をLinkedListに挿入
        photoList.SorR(v);//廊下か部屋かの判別用リストに情報を入れる
-       MuseumMaker();//内装づくり&配置
+
+        // 部屋の名前とプレハブの辞書を作成
+        for (int i = 0; i < roomKindList.Count; i++)
+        {
+            roomKind_PrefabDict.Add(roomKindList[i], roomList[i]);
+        }
+
+
+
+
+        MuseumMaker();//内装づくり&配置
     }
 
     async Task extractionDB(){
+
+        //LogIn login = new LogIn();
+        string userFromU = LogIn.UserName;
+
+
         //DBからデータを取得する
-        string url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/photo_model/";
+        string url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/photo_model/" + userFromU;
+        string tag_url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/tag/" + userFromU;
         string rootUrl = "https://vr-museum-6034ae04d19d.herokuapp.com";//画像貼り付け用のurl
 
         List<MyData> myData = await FetchData(url);//DBから取得する
+        List<TagData> tagData = await FetchDataTag(tag_url);
+
+
 
         //exhibitPrefabに画像を貼り付け、双方向リストに挿入する。
         if(myData != null){
 
-            //LogIn login = new LogIn();
-            string userFromU = "RCC";//login.userFromU;
+            
 
             Vector3 position = Vector3.zero;//Prefabテスト
 
@@ -113,6 +144,18 @@ public class MakeMyMuseum : MonoBehaviour
                 photoList.Append(data.title, data.detailed_title, data.time, exhibitPrefabInstance, height, width, data.tag, data.photo_num);
             }
         }
+        if (tagData != null)
+        {
+            foreach (TagData data in tagData)
+            {
+                // ここでタグデータを処理します
+                roomName_KindDict.Add(data.tag_role, data.room_kinds);
+
+
+                // 例: タグデータをリストに追加したり、特定の処理を行ったりします
+                Debug.Log($"Tag ID: {data.id}, Role: {data.tag_role}, User: {data.user}, Name: {data.name}, Room Kinds: {data.room_kinds}");
+            }
+        }
 
     }
 
@@ -133,6 +176,26 @@ public class MakeMyMuseum : MonoBehaviour
         }
     }
 
+    async Task<List<TagData>> FetchDataTag(string url)
+    {
+        using (HttpClient client = new HttpClient())
+        {//HTTPリクエストを送信し、受信する
+            HttpResponseMessage response = await client.GetAsync(url);//レスポンス結果
+
+            if (response.IsSuccessStatusCode)
+            {//レスポンスが正常に取得できた時、データを取得する
+                string responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<TagData>>(responseData);
+            }
+            else
+            {//エラー処理
+                Debug.LogError("Error: " + response.StatusCode);
+                return null;
+            }
+        }
+    }
+
+
     [Serializable]
     public class MyData{
     public int id;
@@ -147,6 +210,16 @@ public class MakeMyMuseum : MonoBehaviour
     public string tag;
         
     }
+
+    [Serializable]
+    public class TagData
+    {
+        public int id;
+        public string tag_role;
+        public string user;
+        public string name;
+        public string room_kinds;
+    }
     
     private void MuseumMaker()
     {
@@ -160,7 +233,7 @@ public class MakeMyMuseum : MonoBehaviour
         for (int i = 0; i < v.Count;)
         {
             
-            if (v[i].Contains("s"))
+            if (v[i].Contains("通路"))
             {
                 // 通路
                 Vector3 position = startPosition + streetNum * positionOffset;
@@ -190,7 +263,7 @@ public class MakeMyMuseum : MonoBehaviour
                 exhibitNum++;
                 //current = current.NextPhoto;
                 
-                while (i < v.Count && v[i].Contains("s"))
+                while (i < v.Count && v[i].Contains("通路"))
                 {
                     current = current.NextPhoto;
 
@@ -226,6 +299,17 @@ public class MakeMyMuseum : MonoBehaviour
             else
             {
                 roomName = v[i];
+
+                //roomsetting
+                if(!roomName_KindDict.ContainsKey(roomName))
+                {
+                    roomPrefab = roomList[0];
+                }else
+                {
+                    roomPrefab = roomKind_PrefabDict[roomName_KindDict[roomName]];
+                }
+
+
                 // 通路
                 Vector3 position = startPosition + streetNum * positionOffset;
                 GameObject parentInstance = Instantiate(roomPrefab, position, Quaternion.identity);
