@@ -33,11 +33,11 @@ class PhotoForm(forms.ModelForm):
 class TagForm(forms.ModelForm):
 
     ROOM_CHOICES = [
-        ('ノーマル', 'ノーマル'),
-        ('春', '春'),
-        ('夏', '夏'),
-        ('秋', '秋'),
-        ('冬', '冬'),
+        ('normal', 'ノーマル'),
+        ('spring', '春'),
+        ('summer', '夏'),
+        ('autumn', '秋'),
+        ('winter', '冬'),
     ]
 
     name = forms.CharField(max_length=20, label='Tag Name')

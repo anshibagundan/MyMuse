@@ -3,6 +3,7 @@ import json
 import logging
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
@@ -207,21 +208,28 @@ class PhotoModelListView(APIView):
     serializer_class = PhotoSerializer
     permission_classes = [permissions.AllowAny]
 
-    def get_queryset(self):
-        return Photo.objects.all().order_by('photo_num')
+    def get_queryset(self, username):
+        User = get_user_model()
+        user = get_object_or_404(User, username=username)
+        return Photo.objects.filter(user=user).order_by('photo_num')
 
-    def get(self, request):
-        queryset = self.get_queryset()  # get_queryset() メソッドを呼び出してクエリセットを取得
+    def get(self, request, pk):
+        queryset = self.get_queryset(pk)  # pkはURLから取得したユーザー名
         serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data)
 
 
 class TagModelListView(APIView):
     permission_classes = [permissions.AllowAny]
+
+    def get_queryset(self, username):
+        User = get_user_model()
+        user = get_object_or_404(User, username=username)
+        return Tag.objects.filter(user=user).order_by('name')
     
-    def get(self, request, format=None):
-        tags = Tag.objects.all()
-        serializer = TagSerializer(tags, many=True)
+    def get(self, request, pk):
+        queryset = self.get_queryset(pk)
+        serializer = TagSerializer(queryset, many=True)
         return Response(serializer.data)
 
 
