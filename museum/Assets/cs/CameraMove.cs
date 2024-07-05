@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour
 {
     public OVRCameraRig ovrCameraRig;
-    public float moveSpeed = 2.0f;
+    public float moveSpeed = 20.0f;
     public float minDistance = 0.1f;  // 衝突の最小距離
 
     private Transform centerEyeAnchor;
@@ -51,6 +51,11 @@ public class CameraMove : MonoBehaviour
         if (IsCollisionAhead(moveAmount, minDistance))
         {
             // 衝突がある場合、移動をキャンセル
+            moveAmount = Vector3.zero;
+        }
+
+        if(OVRToStreet.isToStreet || OVRToRoom.isEnterPicture)
+        {
             moveAmount = Vector3.zero;
         }
 
