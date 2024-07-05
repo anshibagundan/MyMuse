@@ -307,19 +307,38 @@
         <div id="photo_table_flam">
             {% for tag in tags %}
             <div style="display: flex">
-                <h3>{{ tag.name }}：{{tag.tag}}</h3>
+                <h3>{{ tag.name }}：{{tag.tag_role}}</h3>
                 <form method="post" action="{% url 'tag_delete' pk=tag.id %}">
                     {% csrf_token %}
-                    <button type="submit" onclick="return confirm('Are you sure you want to delete this tag?');">Delete Tag</button>
+                    {% with has_photos=False %}
+                        {% for photo in photos %}
+                            {% if photo.tag == tag.tag_role and not has_photos %}
+                                {% with has_photos=True %}
+                                {% endwith %}
+                            {% endif %}
+                            {% if forloop.last %}
+                                {% if has_photos %}
+                                <button onclick="alert('先に写真を削除してください'); return false;">Delete Tag</button>
+                                {% else %}
+                                <button onclick="alert('先に写真を削除してください'); return false;">Delete Tag</button>
+                                {% endif %}
+                            {% endif %}
+                            {% empty %}
+                            <button type="submit" onclick="return confirm('Are you sure you want to delete this tag?');">Delete Tag</button>
+                        {% endfor %}
+                    {% endwith %}
                 </form>
-
+                <form id="edit-form-{{ tag.id }}" method="post" action="{% url 'tag_edit' pk=tag.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Edit Tag</button>
+                </form>
             </div>
 
-            <table id="photo_table">
+            <div id="photo_table">
                 {% for photo in photos %}
-                {% if photo.tag == tag.tag %}
+                {% if photo.tag == tag.tag_role %}
 
-                    <div style="display: grid; width: calc((100% - 80px) / 5); background-color: #A2CAF9; border: solid 1px coral; align-items: center; justify-items: center;">
+                    <div style="display: grid; background-color: #A2CAF9; border: solid 1px coral; align-items: center; justify-items: center;">
                         <div>{{ photo.title }}</div>
                         <div>{{ photo.detailed_title }}</div>
                         <div>{{ photo.time }}</div>
@@ -330,12 +349,14 @@
                             {% csrf_token %}
                             <button type="submit" onclick="return confirm('Are you sure you want to delete this photo {{ photo.title }}?');">Delete Photo</button>
                         </form>
+
                         <br>
                     </div>
 
                 {% endif %}
                 {% endfor %}
-            </table>
+            </div>
+
             {% endfor %}
         </div>
     </div>
@@ -362,21 +383,39 @@
 
     {% endblock %}
 
-    <script defer>
-        document.getElementById("id_tag").addEventListener("click", function(event) {
+    <script>
+        function handleTagRoleClick() {
             var selectedTag = event.target.value;
             var nameField = document.getElementById("id_name");
             var roomKindsField = document.getElementById("id_room_kinds");
+            var roomKindsHiddenField = document.getElementById("id_room_kinds_hidden");
 
             if (selectedTag.includes('通路')) {
                 nameField.value = '日常';
-                roomKindsField.value = 'ノーマル';
+                nameField.readOnly = true; // Use readOnly instead of disabled
+                roomKindsField.selectedIndex = 0;
+                roomKindsField.disabled = true;
+
+                // Hidden field handling
+                var roomKindsHiddenField = document.createElement('input');
+                roomKindsHiddenField.type = 'hidden';
+                roomKindsHiddenField.id = 'id_room_kinds_hidden';
+                roomKindsHiddenField.name = 'room_kinds';
+                roomKindsHiddenField.value = roomKindsField.options[0].value;
+                document.getElementById("tag_form").appendChild(roomKindsHiddenField);
             } else {
                 nameField.value = '';
-                roomKindsField.value = '';
-            }
-        });
+                nameField.readOnly = false;
+                roomKindsField.selectedIndex = 0;
+                roomKindsField.disabled = false;
 
+                // Remove the hidden field if it exists
+                var existingHiddenField = document.getElementById("id_room_kinds_hidden");
+                if (existingHiddenField) {
+                    existingHiddenField.remove();
+                }
+            }
+        }
     </script>
 
     <script>
@@ -400,6 +439,17 @@
         document.body.appendChild(form);
         form.submit();
     });
+    </script>
+    <script>
+        function showEditForm(tagId) {
+            document.getElementById('edit-form-' + tagId).style.display = 'block';
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function hideEditForm(tagId) {
+            document.getElementById('edit-form-' + tagId).style.display = 'none';
+            document.getElementById("overlay").style.display = "none";
+        }
     </script>
     <script>
         document.getElementById("add_button").addEventListener("click", function() {

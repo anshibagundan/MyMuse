@@ -17,4 +17,4 @@ class UserSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['id', 'tag', 'user']
+        fields = ['id', 'tag_role', 'user', 'name', 'room_kinds']

@@ -8,7 +8,7 @@ from rest_framework.routers import DefaultRouter
 from vr_museum_app.views import (PhotoModelListView, PhotoViewSet,
                                  UserModelListView, index, user_create, unity_login,
                                  user_login, TagCreateView, TagEditView, TagDeleteView, CreatePhotoView,
-                                 DeletePhotoView)
+                                 DeletePhotoView, TagModelListView)
 
 router = DefaultRouter()
 router.register(r'photos', PhotoViewSet)
@@ -31,6 +31,7 @@ urlpatterns = [
     path('photo/create/', CreatePhotoView.as_view(), name='photo_create'),
     path('photo/<int:pk>/delete/', DeletePhotoView.as_view(), name='photo_delete'),
 
-    path('api/photo_model/<int:pk>/', PhotoModelListView.as_view(), name='photo_model_list'),
+    path('api/photo_model/', PhotoModelListView.as_view(), name='photo_model_list'),
+    path('api/tag/', TagModelListView.as_view(), name='tag_model_list'),
     path('api/user_model/', UserModelListView.as_view(), name='user_model_list'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

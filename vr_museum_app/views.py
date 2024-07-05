@@ -1,10 +1,8 @@
 import io
 import json
 import logging
-from io import BytesIO
 
-import requests
-from django.core.exceptions import ValidationError
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
@@ -22,10 +20,11 @@ from rest_framework.views import APIView
 
 from .forms import PhotoForm, TagForm
 from .models import Photo, Tag
-from .serializers import PhotoSerializer, UserSerializer
+from .serializers import PhotoSerializer, UserSerializer, TagSerializer
 from django.db import transaction
 
 logger = logging.getLogger(__name__)
+
 
 class PhotoViewSet(viewsets.ModelViewSet):
     queryset = Photo.objects.all()
@@ -49,7 +48,7 @@ def user_login(request):
             messages.error(request, 'ユーザー名またはパスワードが間違っています。')
             return render(request, 'login.html')
 
-    return render(request, 'login.html' ,{'MEDIA_URL':settings.MEDIA_URL})
+    return render(request, 'login.html', {'MEDIA_URL':settings.MEDIA_URL})
 
 
 def user_create(request):
@@ -62,7 +61,7 @@ def user_create(request):
             user = User.objects.create_user(username=new_username, password=new_password)
             # ログメッセージ作成
             logger.info('ユーザーの作成に成功しました。ユーザー名: %s', new_username)
-            Tag.objects.create(user=user, tag='通路1')
+            Tag.objects.create(user=user, tag_role='通路1')
         except Exception as e:
             # ログメッセージ作成
             logger.error('ユーザーの作成に失敗しました。エラー: %s', e)
@@ -110,7 +109,7 @@ def index(request):
     tags = Tag.objects.filter(user=request.user)
     photos = Photo.objects.filter(user=request.user).order_by('photo_num')
     for tag in tags:
-        print(f"Tag: {tag.tag}, Tag Name: {tag.name}")
+        print(f"Tag: {tag.tag_role}, Tag Name: {tag.name}")
 
     return render(request, 'index.html', {
         'form': form,
@@ -137,16 +136,6 @@ class TagEditView(generic.UpdateView):
     template_name = 'index.html'
     success_url = reverse_lazy('title')
 
-    def test_func(self):
-        tag = self.get_object()
-        return self.request.user.username == tag.user
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['user'] = self.request.user.username
-        return kwargs
-
-
 class TagDeleteView(generic.DeleteView):
     def test_func(self):
         tag = get_object_or_404(Tag, pk=self.kwargs['pk'])
@@ -156,6 +145,7 @@ class TagDeleteView(generic.DeleteView):
         tag = get_object_or_404(Tag, pk=self.kwargs['pk'])
         tag.delete()
         return redirect('title')  # インデックスページにリダイレクト
+
 
 class CreatePhotoView(generic.CreateView):
     model = Photo
@@ -170,11 +160,9 @@ class CreatePhotoView(generic.CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tag_form'] = TagForm(user=self.request.user)
-        context['tag_delete_form'] = TagFormDelete(user=self.request.user)
         context['obj'] = Photo.objects.filter(user=self.request.user).order_by('photo_num')
         context['MEDIA_URL'] = settings.MEDIA_URL
         return context
-
 
     def form_valid(self, form):
         with transaction.atomic():
@@ -203,54 +191,6 @@ class CreatePhotoView(generic.CreateView):
             photo.save()
         return redirect('title')
 
-# class CreatePhotoView(generic.CreateView):
-#     model = Photo
-#     form_class = PhotoForm
-#     template_name = 'index.html'
-#     success_url = reverse_lazy('title')
-#
-#     def form_valid(self, form):
-#         try:
-#             form.instance.user = self.request.user
-#
-#             # アップロードされた画像ファイルを取得
-#             image_file = self.request.FILES['content']
-#             # PILを使用して画像を開く
-#             image = Image.open(io.BytesIO(image_file.read()))
-#             # 画像の幅と高さを取得
-#             form.instance.width, form.instance.height = image.size
-#
-#             # # タグを設定
-#             # form.instance.tag = self.request.POST.get('tag')
-#             #
-#             # # 新しい写真番号を取得
-#             # new_photo_num = int(self.request.POST.get('photo_num'))
-#             # max_photo_num = Photo.objects.count() + 1
-#             #
-#             # if new_photo_num > max_photo_num:
-#             #     form.instance.photo_num = max_photo_num
-#             # else:
-#             #     # 既存の写真番号をシフト
-#             #     qs = Photo.objects.filter(photo_num__gte=new_photo_num).order_by('-photo_num')
-#             #     for p in qs:
-#             #         p.photo_num += 1
-#             #         p.save()
-#             #     form.instance.photo_num = new_photo_num
-#
-#             # デバッグ情報
-#             print(f"Form data: {form.cleaned_data}")
-#             print(f"User: {self.request.user}")
-#             print(f"Tag: {form.instance.tag}")
-#             print(f"Photo num: {form.instance.photo_num}")
-#
-#             return super().form_valid(form)
-#         except ValidationError as e:
-#             print(f"Validation error: {e}")
-#             return self.form_invalid(form)
-#         except Exception as e:
-#             print(f"Unexpected error: {e}")
-#             return self.form_invalid(form)
-
 
 class DeletePhotoView(generic.DeleteView):
     def test_func(self):
@@ -273,6 +213,15 @@ class PhotoModelListView(APIView):
     def get(self, request):
         queryset = self.get_queryset()  # get_queryset() メソッドを呼び出してクエリセットを取得
         serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+
+class TagModelListView(APIView):
+    permission_classes = [permissions.AllowAny]
+    
+    def get(self, request, format=None):
+        tags = Tag.objects.all()
+        serializer = TagSerializer(tags, many=True)
         return Response(serializer.data)
 
 

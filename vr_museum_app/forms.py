@@ -26,7 +26,7 @@ class PhotoForm(forms.ModelForm):
         
         # Set choices for tag field
         if user:
-            tag_choices = [(tag.tag, tag.tag) for tag in Tag.objects.filter(user=user)]
+            tag_choices = [(tag.tag_role, tag.tag_role) for tag in Tag.objects.filter(user=user)]
             self.fields['tag'].choices = tag_choices
 
 
@@ -45,9 +45,9 @@ class TagForm(forms.ModelForm):
 
     class Meta:
         model = Tag
-        fields = ('tag','name','room_kinds')
+        fields = ('tag_role','name','room_kinds')
         widgets = {
-            'tag': forms.TextInput(attrs={'class': 'form-control'}),
+            'tag_role': forms.TextInput(attrs={'class': 'form-control'}),
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'room_kinds': forms.Select(attrs={'class': 'form-control'}),
         }
@@ -57,19 +57,23 @@ class TagForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         # r タグの個数を取得
-        r_count = Tag.objects.filter(tag__startswith='部屋', user=username).count() + 1
+        r_count = Tag.objects.filter(tag_role__startswith='部屋', user=username).count() + 1
         # s タグの個数を取得
-        s_count = Tag.objects.filter(tag__startswith='通路', user=username).count() + 1
+        s_count = Tag.objects.filter(tag_role__startswith='通路', user=username).count() + 1
 
         # 選択肢を動的に設定する
         choices = [
             ('部屋{}'.format(r_count), '部屋{}'.format(r_count)),
             ('通路{}'.format(s_count), '通路{}'.format(s_count)),
         ]
-        # tag フィールドの選択肢を更新する
-        self.fields['tag'].widget = forms.Select(
+
+        # tag_role フィールドの選択肢を更新し、onClick イベントを追加
+        self.fields['tag_role'].widget = forms.Select(
             choices=[(option, option) for option in [choice[1] for choice in choices]],
-            attrs={'class': 'form-control'}
+            attrs={
+                'class': 'form-control',
+                'onChange': "handleTagRoleClick()"
+            }
         )
 
 
