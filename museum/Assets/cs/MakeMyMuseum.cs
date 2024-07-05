@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class MakeMyMuseum : MonoBehaviour
 {
@@ -228,6 +229,10 @@ public class MakeMyMuseum : MonoBehaviour
                 // 通路
                 Vector3 position = startPosition + streetNum * positionOffset;
                 GameObject parentInstance = Instantiate(roomPrefab, position, Quaternion.identity);
+                //roomNameの引き渡し
+                RoomNameCenterShow roomNameCenterShow = parentInstance.GetComponentInChildren<RoomNameCenterShow>();
+                roomNameCenterShow.TextChange(roomName);
+                
                 streetNum++;
 
                 // 写真
