@@ -6,7 +6,6 @@ public class ToStreet : MonoBehaviour
 {
     public static bool isToStreet = false;
     private float time = 0;
-
     private void Update()
     {
         if (isToStreet)

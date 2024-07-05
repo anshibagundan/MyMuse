@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class OVRToRoom : MonoBehaviour
@@ -11,6 +12,9 @@ public class OVRToRoom : MonoBehaviour
     private float maxAngle = -80f;
     private float minAngle = -100f;
     public float rotateSpeed = 70f;
+
+    //部屋の名前表示
+    private RoomNameCenterShow roomNameCenterShow;
 
     void Start()
     {
@@ -57,6 +61,10 @@ public class OVRToRoom : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, -90 - eyeTrackDiff, 0);
             transform.position += new Vector3(2, 0, 0);
             isEnterPicture = true;
+
+            //RoomNameCenterShowの取得
+            Transform roomNameCenter = other.transform.parent.GetChild(11);
+            roomNameCenterShow = roomNameCenter.GetComponent<RoomNameCenterShow>();
         }
     }
 
@@ -65,6 +73,8 @@ public class OVRToRoom : MonoBehaviour
     {
         transform.position += new Vector3(-25, 0, 0);
         transform.position = new Vector3(transform.position.x, 6, transform.position.z);
+        //部屋の名前表示
+        StartCoroutine(roomNameCenterShow.GraduallyShow());
     }
 
     private void EnterPictureAnimation()
