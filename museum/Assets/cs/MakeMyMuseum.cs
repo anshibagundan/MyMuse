@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 public class MakeMyMuseum : MonoBehaviour
 {
     private List<string> v = new List<string>{};//s1,s2,...は廊下でに1,r1,r1,r2,r2,...は部屋に画像を配置する判別リスト
-        
+    private Dictionary<string, string> roomData = new Dictionary<string, string>();
     public GameObject streetPrefab;
     public GameObject roomPrefab;
     private Vector3 startPosition = new Vector3(0, 0, 50); // 開始位置
@@ -61,12 +61,13 @@ public class MakeMyMuseum : MonoBehaviour
 
     async void Start()
     {
-       await extractionDB();//データを抽出して画像をLinkedListに挿入
+       await extractionDBFromImage();//データを抽出して画像をLinkedListに挿入
+       await extractionDBFromTag();
        photoList.SorR(v);//廊下か部屋かの判別用リストに情報を入れる
        MuseumMaker();//内装づくり&配置
     }
 
-    async Task extractionDB(){
+    async Task extractionDBFromImage(){
         //DBからデータを取得する
         string url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/photo_model/";
         string rootUrl = "https://vr-museum-6034ae04d19d.herokuapp.com";//画像貼り付け用のurl
@@ -113,18 +114,56 @@ public class MakeMyMuseum : MonoBehaviour
                 photoList.Append(data.title, data.detailed_title, data.time, exhibitPrefabInstance, height, width, data.tag, data.photo_num);
             }
         }
-
     }
 
     //DBからデータ取得する
     async Task<List<MyData>> FetchData(string url){
-    
         using (HttpClient client = new HttpClient()){//HTTPリクエストを送信し、受信する
             HttpResponseMessage response = await client.GetAsync(url);//レスポンス結果
 
             if(response.IsSuccessStatusCode){//レスポンスが正常に取得できた時、データを取得する
                 string responseData = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<MyData>>(responseData);
+            }
+            else{//エラー処理
+                Debug.LogError("Error: " + response.StatusCode);
+                return null;
+            }
+        }
+    }
+
+    async Task extractionDBFromTag(){
+        //DBからデータを取得する
+        string url = "https://vr-museum-6034ae04d19d.herokuapp.com/api/photo_model/";
+
+        List<MyTag> myTag = await FetchDataTag(url);//DBから取得する
+
+        if(myTag != null){
+            string userFromU = "RCC";//login.userFromU;
+
+            foreach(MyTag data in myTag){
+                if(data.user == userFromU){
+                    roomData.Add(data.tag_role, data.room_kinds);
+                }
+            }
+        }
+        else{
+                Debug.Log("user doesn't have data");
+        }
+
+        foreach(KeyValuePair<string, string> item in roomData) {
+            Debug.Log("キーは" + item.Key + "です。  バリューは" + item.Value + "です。");
+        }
+
+    }
+
+    async Task<List<MyTag>> FetchDataTag(string url){
+        using (HttpClient client = new HttpClient()){//HTTPリクエストを送信し、受信する
+            HttpResponseMessage response = await client.GetAsync(url);//レスポンス結果
+
+            if(response.IsSuccessStatusCode){//レスポンスが正常に取得できた時、データを取得する
+                string responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<MyTag>>(responseData);
             }
             else{//エラー処理
                 Debug.LogError("Error: " + response.StatusCode);
@@ -145,7 +184,15 @@ public class MakeMyMuseum : MonoBehaviour
     public int height;
     public int width;
     public string tag;
-        
+    }
+
+    [Serializable]
+    public class MyTag{
+    public int id;
+    public string tag_role;
+    public string user;
+    public string name;
+    public string room_kinds;
     }
     
     private void MuseumMaker()
