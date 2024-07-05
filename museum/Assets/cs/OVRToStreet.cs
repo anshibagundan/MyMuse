@@ -49,7 +49,7 @@ public class OVRToStreet : MonoBehaviour
         if (other.gameObject.tag == "toStreet" && !isToStreet && canBackStreetByEyeTrack)
         {
             //RoomNameLeftUpShowの取得
-            Transform roomNameLeftUp = other.transform.parent.GetChild(12);
+            Transform roomNameLeftUp = other.transform.parent.GetChild(1);
             roomNameLeftUpShow = roomNameLeftUp.GetComponent<RoomNameLeftUpShow>();
 
             toStreet();

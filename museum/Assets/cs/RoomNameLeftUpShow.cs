@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RoomNameLeftUpShow : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private TextMeshPro nameText;
     void Start()
     {
         //カメラ設定
@@ -13,15 +13,22 @@ public class RoomNameLeftUpShow : MonoBehaviour
         canvas.worldCamera = Camera.main;
         canvas.planeDistance = 1;
         
+        nameText = this.GetComponent<TextMeshPro>();
         Hide();
     }
 
     public void Show(string roomName){
-        this.GetComponent<TextMeshPro>().text = roomName;
-        this.gameObject.SetActive(true);
+        nameText.text = roomName;
+        float alpha = 1.0f;
+        var colortemp = nameText.color;
+
+        nameText.color = new Color(colortemp.r, colortemp.g, colortemp.b, alpha);
     }
 
     public void Hide(){
-        this.gameObject.SetActive(false);
+        float alpha = 0.0f;
+        var colortemp = nameText.color;
+
+        nameText.color = new Color(colortemp.r, colortemp.g, colortemp.b, alpha);
     }
 }

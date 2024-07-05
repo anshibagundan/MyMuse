@@ -63,7 +63,7 @@ public class OVRToRoom : MonoBehaviour
             isEnterPicture = true;
 
             //RoomNameCenterShowの取得
-            Transform roomNameCenter = other.transform.parent.GetChild(11);
+            Transform roomNameCenter = other.transform.parent.GetChild(0);
             roomNameCenterShow = roomNameCenter.GetComponent<RoomNameCenterShow>();
         }
     }

@@ -28,10 +28,6 @@ public class RoomNameCenterShow : MonoBehaviour
         nameText.ForceMeshUpdate(true);
         nameCount = name.Length;
         charInfos = nameText.textInfo.characterInfo;
-        for (var i = 0; i < charInfos.Length; i++) // 全ての文字を透明化
-        {
-            SetTextAlpha(i, 0);
-        }
     }
 
     public IEnumerator GraduallyShow()

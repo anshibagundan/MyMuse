@@ -122,6 +122,10 @@ public class MuseumMaker : MonoBehaviour
                 Vector3 position = startPosition + streetNum * positionOffset;
                 GameObject parentInstance = Instantiate(roomPrefab, position, Quaternion.identity);
                 streetNum++;
+
+                //roomNameの引き渡し
+                RoomNameCenterShow roomNameCenterShow = parentInstance.GetComponentInChildren<RoomNameCenterShow>();
+                roomNameCenterShow.TextChange(roomName);
                 // 写真
                 Quaternion rotation = Quaternion.Euler(roomPhotoRote[exhibitNum]);
                 Instantiate(exhibitPrefab, roomPhotoPos[exhibitNum] + position, rotation, parentInstance.transform);
