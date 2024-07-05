@@ -131,7 +131,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8858644727092728231, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
+    - target: {fileID: 1794752348833602286, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013693742347659340, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -174,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 9077601980013027387, guid: 77f914ebd3f914617aa749f94ab35b24, type: 3}
       propertyPath: m_Name
       value: SeasonPre
+      objectReference: {fileID: 0}
+    - target: {fileID: 5712059471328084049, guid: 6839ec64e563c4880b50c5e4aedbc9cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

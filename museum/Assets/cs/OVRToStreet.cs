@@ -11,6 +11,10 @@ public class OVRToStreet : MonoBehaviour
 
     private bool canBackStreetByEyeTrack = false;
 
+     //部屋の名前表示
+    private RoomNameLeftUpShow roomNameLeftUpShow;
+
+
     void Start()
     {
         if (ovrCameraRig == null)
@@ -44,6 +48,10 @@ public class OVRToStreet : MonoBehaviour
         //プレイヤーだったら
         if (other.gameObject.tag == "toStreet" && !isToStreet && canBackStreetByEyeTrack)
         {
+            //RoomNameLeftUpShowの取得
+            Transform roomNameLeftUp = other.transform.parent.GetChild(12);
+            roomNameLeftUpShow = roomNameLeftUp.GetComponent<RoomNameLeftUpShow>();
+
             toStreet();
             transform.position += new Vector3(0, 4, 0);
             isToStreet = true;
@@ -54,6 +62,8 @@ public class OVRToStreet : MonoBehaviour
     {
         //廊下に移動
         transform.position += new Vector3(20, 0, 0);
+        //部屋の名前非表示
+        roomNameLeftUpShow.Hide();
     }
 
     private void Drop()
