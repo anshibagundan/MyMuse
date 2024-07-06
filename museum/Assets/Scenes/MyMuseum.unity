@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tag_SeasonPre
       objectReference: {fileID: 0}
+    - target: {fileID: 6082641604368864121, guid: 211edd978b35340b2a386a224fd8e018, type: 3}
+      propertyPath: rotateSpeed
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8444552140470259608, guid: 211edd978b35340b2a386a224fd8e018, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

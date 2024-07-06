@@ -11,7 +11,7 @@ public class OVRToRoom : MonoBehaviour
 
     private float maxAngle = -80f;
     private float minAngle = -100f;
-    public float rotateSpeed = 70f;
+    public float rotateSpeed = 90f;
 
     //部屋の名前表示
     private RoomNameCenterShow roomNameCenterShow;
@@ -93,7 +93,7 @@ public class OVRToRoom : MonoBehaviour
         else
         {
             transform.Rotate(rotateSpeed * Time.deltaTime, 0, 0);
-            transform.position += new Vector3(-0.005f, 0.004f, 0);
+            transform.position += new Vector3(-0.008f, 0.004f, 0);
         }
     }
 }

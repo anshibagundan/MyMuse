@@ -25,7 +25,7 @@ public class LogIn : MonoBehaviour
 
     void Start()
     {
-        // SSL証明書の検証をスキップ（注意：セキュリティ上のリスクがあります）
+        // SSL証明書の検証をスキップ
         System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
         errorTMP = errorText.GetComponent<TextMeshProUGUI>();
         errorText.SetActive(false);

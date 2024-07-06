@@ -36,13 +36,8 @@ public class MakeMyMuseum : MonoBehaviour
     private Dictionary<string, GameObject> roomKind_PrefabDict = new Dictionary<string, GameObject>();
     private List<string> roomKindList = new List<string> { "normal", "spring", "summer", "autumn", "winter" };
 
-    private Dictionary<string, string> roomName_KindDict = new Dictionary<string, string>{
-        {"R1","normal"},
-        {"R2","spring"},
-        {"R3","summer"},
-        {"R4","autumn"},
-        {"R5","winter"}
-    };
+    private Dictionary<string, string> roomName_KindDict = new Dictionary<string, string>();
+    private Dictionary<string, string> TagName_RoomName = new Dictionary<string, string>();
 
     public static int streetNum = 0;
 
@@ -150,6 +145,7 @@ public class MakeMyMuseum : MonoBehaviour
             {
                 // ここでタグデータを処理します
                 roomName_KindDict.Add(data.tag_role, data.room_kinds);
+                TagName_RoomName.Add(data.tag_role, data.name);
 
 
                 // 例: タグデータをリストに追加したり、特定の処理を行ったりします
@@ -308,14 +304,16 @@ public class MakeMyMuseum : MonoBehaviour
                 {
                     roomPrefab = roomKind_PrefabDict[roomName_KindDict[roomName]];
                 }
+                string tag_name = TagName_RoomName[roomName];
 
 
                 // 通路
                 Vector3 position = startPosition + streetNum * positionOffset;
                 GameObject parentInstance = Instantiate(roomPrefab, position, Quaternion.identity);
+
                 //roomNameの引き渡し
                 RoomNameCenterShow roomNameCenterShow = parentInstance.GetComponentInChildren<RoomNameCenterShow>();
-                roomNameCenterShow.TextChange(roomName);
+                roomNameCenterShow.TextChange(tag_name);
                 
                 streetNum++;
 
