@@ -9,7 +9,24 @@
 ## チーム名
 チーム3 白旗
 
-<!-- チームIDとチーム名を入力してください -->
+## メンバー
+<dl>
+            <dt>さとこ</dt>
+            <dd>Unity側でのAPI接続やプレゼン作成，ディレクター</dd>
+            <dt>ちょり</dt>
+            <dd>VRの操作感や物の配置方法などのUnityの処理全般，季節に応じたオブジェクトのモデリング</dd>
+            <dt>ぞの</dt>
+            <dd>APIの作成，Webページの作成，Unityでのログイン処理の作成</dd>
+            <dt>Meg</dt>
+            <dd>美術館や額縁などモデリングや季節に応じた壁紙の作成</dd>
+</dl>
+
+### リンク
+- [さとこ](https://github.com/stk1201)
+- [ちょり](https://x.com/bearl_develop)
+- [ぞの](https://github.com/zono0013)
+- [Meg](https://github.com/MegKuma)
+
 
 
 ## 背景・課題・解決されること
