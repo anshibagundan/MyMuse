@@ -5,7 +5,6 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/zono0013/MyMuseGolangAPI/internal/interface/handler"
-	"github.com/zono0013/MyMuseGolangAPI/internal/interface/middleware"
 )
 
 func NewRouter(
@@ -18,7 +17,7 @@ func NewRouter(
 
 	// ミドルウェアの初期化
 	//authMiddleware := middleware.NewAuthMiddleware(store)
-	router.Use(middleware.CORS())
+	//router.Use(middleware.CORS())
 
 	router.GET("health", health)
 
