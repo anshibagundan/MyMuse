@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/rs/cors"
 	"github.com/zono0013/MyMuseGolangAPI/config"
 	"github.com/zono0013/MyMuseGolangAPI/internal/infrastructure/dao"
 	"github.com/zono0013/MyMuseGolangAPI/internal/infrastructure/persistence/mysql"
@@ -46,7 +45,5 @@ func main() {
 		port = "8080" // Default for local development
 	}
 
-	handler := cors.AllowAll().Handler(router)
-
-	log.Fatal(http.ListenAndServe(":"+port, handler))
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
