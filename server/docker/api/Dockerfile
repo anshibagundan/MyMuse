@@ -11,4 +11,4 @@ RUN go mod download
 RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/api/main.go
 
 # 実行
-CMD ["/app/server/main"]
+CMD ["/app/server/tmp/main"]
