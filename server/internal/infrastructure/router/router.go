@@ -15,6 +15,7 @@ func NewRouter(
 	tagsPhotosHnadler handler.ITagsPhotos,
 ) *gin.Engine {
 	router := gin.Default()
+	router.SetTrustedProxies(nil) // 全プロキシからのアクセスを許可
 
 	// ミドルウェアの初期化
 	//authMiddleware := middleware.NewAuthMiddleware(store)
