@@ -74,7 +74,7 @@ func (h *UserHandler) HandleGoogleCallback(c *gin.Context) {
 	}
 
 	// フロントエンドのダッシュボードへリダイレクト
-	c.Redirect(http.StatusFound, "http://localhost:3000/")
+	c.Redirect(http.StatusFound, "https://my-muse-pink.vercel.app/")
 }
 
 // 新しいエンドポイント: セッション検証
