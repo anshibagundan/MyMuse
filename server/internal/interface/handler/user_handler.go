@@ -61,7 +61,7 @@ func (h *UserHandler) HandleGoogleCallback(c *gin.Context) {
 		Path:     "/",
 		MaxAge:   60 * 60 * 24, // セッションの有効期限（適宜調整）
 		HttpOnly: true,
-		Secure:   false, // HTTPSが有効な環境で使用
+		Secure:   true, // HTTPSが有効な環境で使用
 		SameSite: http.SameSiteLaxMode,
 	}
 
