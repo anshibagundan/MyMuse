@@ -13,6 +13,9 @@ type OAuth2Client struct {
 }
 
 func NewOAuth2Client(clientID, clientSecret, redirectURL string) *OAuth2Client {
+	fmt.Printf("clientID: %s\n", clientID)
+	fmt.Printf("clientSecret: %s\n", clientSecret)
+	fmt.Printf("redirectURL: %s\n", redirectURL)
 	config := &oauth2.Config{
 		ClientID:     clientID,
 		ClientSecret: clientSecret,
