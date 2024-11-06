@@ -6,4 +6,4 @@ build:
   docker:
     web: docker/api/Dockerfile
 run:
-  web: /app/server/tmp/main
+  web: /app/main
