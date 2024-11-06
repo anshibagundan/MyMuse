@@ -4,7 +4,6 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/sessions"
 	"github.com/zono0013/MyMuseGolangAPI/internal/interface/handler"
 	"github.com/zono0013/MyMuseGolangAPI/internal/interface/middleware"
 )
@@ -14,7 +13,6 @@ func NewRouter(
 	tagHandler handler.ITagHandler,
 	photoHandler handler.IPhotoHandler,
 	tagsPhotosHnadler handler.ITagsPhotos,
-	store *sessions.CookieStore,
 ) *gin.Engine {
 	router := gin.Default()
 
@@ -27,10 +25,7 @@ func NewRouter(
 	// 認証不要のルート
 	auth := router.Group("/auth")
 	{
-		auth.GET("/google/login", userHandler.HandleGoogleLogin)
-		auth.GET("/google/callback", userHandler.HandleGoogleCallback)
-		auth.GET("/check-session", userHandler.CheckSession)
-		auth.GET("/logout", userHandler.HandleLogout)
+		auth.POST("/login", userHandler.HandleLogin)
 	}
 
 	// 認証が必要なAPIルート
