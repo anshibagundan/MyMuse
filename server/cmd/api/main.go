@@ -46,5 +46,10 @@ func main() {
 	router := router.NewRouter(userHandler, tagHandler, photoHandler, tagsPhotosHandler, store)
 	fmt.Println("Router success")
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default for local development
+	}
+
+	log.Fatal(http.ListenAndServe(":"+port, router))
 }
