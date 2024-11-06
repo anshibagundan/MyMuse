@@ -61,7 +61,7 @@ func (u *userUseCase) Login(ctx context.Context, input input.User) (*output.User
 		return nil, fmt.Errorf("failed to hash password: %v", err)
 	}
 
-	user, err = u.userRepo.FindByID(ctx, input.Email)
+	user, err = u.userRepo.FindByEmail(ctx, input.Email)
 	if err != nil {
 		// 新規ユーザーの作成
 		user = &model.User{

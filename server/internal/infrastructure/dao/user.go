@@ -35,6 +35,25 @@ func (r *userRepository) FindByID(ctx context.Context, userID string) (*model.Us
 	return &user, nil
 }
 
+func (r *userRepository) FindByEmail(ctx context.Context, email string) (*model.User, error) {
+	var user model.User
+
+	fmt.Println(email)
+
+	// データベース操作
+	result := r.db.WithContext(ctx).Where("email = ?", email).First(&user)
+	if result.Error != nil {
+		// エラーが "Record Not Found" の場合には nil, nil を返す
+		if result.Error == gorm.ErrRecordNotFound {
+			return nil, errors.New("ユーザーが見つかりませんでした")
+		}
+		// それ以外のエラーはそのまま返す
+		return nil, result.Error
+	}
+
+	return &user, nil
+}
+
 func (r *userRepository) Create(ctx context.Context, user *model.User) error {
 	return r.db.WithContext(ctx).Create(user).Error
 }
