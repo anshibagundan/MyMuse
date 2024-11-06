@@ -15,5 +15,7 @@ RUN go mod download
 # 本番用にビルド（CGOを無効にし、Linux用にビルド）
 RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/api/main.go
 
+EXPOSE 8080
+
 # 実行
 CMD ["/app/main"]
