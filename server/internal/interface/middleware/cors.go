@@ -8,7 +8,7 @@ import (
 // CORSミドルウェア
 func CORS() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "https://my-muse-pink.vercel.app/") // 許可するオリジン
+		c.Header("Access-Control-Allow-Origin", "http://localhost:3000") // 許可するオリジン
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization, X-Requested-With")
 		c.Header("Access-Control-Allow-Credentials", "true")
