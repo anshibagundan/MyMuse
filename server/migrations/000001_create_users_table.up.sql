@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, -- タグID（主キー）
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- タグID（主キー）
     email VARCHAR(255) NOT NULL UNIQUE, -- Emailはユニーク制約付き
     password VARCHAR(255) NOT NULL, -- パスワードのハッシュを保存
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
