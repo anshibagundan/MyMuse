@@ -71,6 +71,7 @@ func (u *userUseCase) Login(ctx context.Context, input input.User) (*output.User
 		if err := u.userRepo.Create(ctx, user); err != nil {
 			return nil, err
 		}
+		user, err = u.userRepo.FindByID(ctx, input.Email)
 	}
 
 	return &output.UserOutput{
