@@ -65,7 +65,6 @@ func (u *userUseCase) Login(ctx context.Context, input input.User) (*output.User
 	if err != nil {
 		// 新規ユーザーの作成
 		user = &model.User{
-			ID:       input.Email,
 			Email:    input.Email,
 			Password: hashedPassword,
 		}
