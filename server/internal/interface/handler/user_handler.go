@@ -62,7 +62,7 @@ func (h *UserHandler) HandleGoogleCallback(c *gin.Context) {
 		MaxAge:   60 * 60 * 24, // セッションの有効期限（適宜調整）
 		HttpOnly: true,
 		Secure:   true, // HTTPSが有効な環境で使用
-		SameSite: http.SameSiteLaxMode,
+		SameSite: http.SameSiteNoneMode,
 	}
 
 	fmt.Println("session")
@@ -74,7 +74,7 @@ func (h *UserHandler) HandleGoogleCallback(c *gin.Context) {
 	}
 
 	// フロントエンドのダッシュボードへリダイレクト
-	c.Redirect(http.StatusFound, "https://my-muse-pink.vercel.app/")
+	c.Redirect(http.StatusFound, "https://my-muse-pink.vercel.app")
 }
 
 // 新しいエンドポイント: セッション検証
