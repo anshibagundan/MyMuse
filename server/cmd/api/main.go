@@ -22,6 +22,7 @@ func main() {
 	fmt.Println("Database connection success")
 	oauthClient := oauth2.NewOAuth2Client(cfg.Google.ClientID, cfg.Google.ClientSecret, cfg.Google.RedirectURL)
 	fmt.Println("OAuth2 Client success")
+
 	store := sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 	fmt.Println("Session store success")
 
