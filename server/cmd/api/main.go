@@ -23,7 +23,6 @@ func main() {
 	fmt.Println("Database connection success")
 	oauthClient := oauth2.NewOAuth2Client(os.Getenv("GOOGLE_CLIENT_ID"), os.Getenv("GOOGLE_CLIENT_SECRET"), os.Getenv("GOOGLE_CALLBACK_URL"))
 	fmt.Println("OAuth2 Client success")
-
 	store := sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY")))
 	fmt.Println("Session store success")
 
