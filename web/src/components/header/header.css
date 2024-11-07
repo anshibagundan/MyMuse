@@ -1,0 +1,44 @@
+.my-muse-title {
+    font-family: 'Klee', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    color: #000000;
+}
+
+.my-muse-header {
+    position: fixed; /* ヘッダーを画面の上部に固定 */
+    top: 0; /* 上からの位置を0に設定 */
+    left: 0; /* 左からの位置を0に設定 */
+    width: 100%; /* 幅を100%に設定 */
+    z-index: 1000; /* 高い値を設定して、他の要素よりも前に表示 */
+    background-color: rgba(225, 224, 224, 0.8); /* 背景色を指定して、他のコンテンツと重なる際に見えるようにする */
+    padding: 8px; /* ヘッダーのパディングを指定 */
+}
+
+.login-button {
+    /* Login */
+    width: 120px;
+    height: 40px;
+
+
+
+    font-family: 'Klee';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    border-left: 2px solid #7c7c7c;
+
+    transition: background 0.3s, box-shadow 0.3s; /* ホバー時のトランジション */
+}
+
+.login-button:hover {
+    background: #cdcdcd; /* 色を濃くする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+
