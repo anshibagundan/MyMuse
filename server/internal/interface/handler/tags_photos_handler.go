@@ -18,6 +18,7 @@ func NewTagsPhotosHnadler(useCase usecase.TagsPhotosUseCase) ITagsPhotos {
 
 type ITagsPhotos interface {
 	GetAll(ctx *gin.Context)
+	GetAllUnity(ctx *gin.Context)
 }
 
 func (h *tags_photos_handler) GetAll(c *gin.Context) {
@@ -29,5 +30,14 @@ func (h *tags_photos_handler) GetAll(c *gin.Context) {
 		c.JSON(500, gin.H{"error": err.Error()})
 	}
 
+	c.JSON(200, output)
+}
+
+func (h *tags_photos_handler) GetAllUnity(c *gin.Context) {
+	email := c.Param("email")
+	output, err := h.tagsPhotosUsecase.GetAllUnity(c, email)
+	if err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+	}
 	c.JSON(200, output)
 }

@@ -57,7 +57,7 @@ func NewRouter(
 	unity := api.Group("/unity")
 	{
 		unity.GET("/login")
-		unity.GET("/:user_id")
+		unity.GET("/:email", tagsPhotosHnadler.GetAllUnity)
 	}
 	//}
 

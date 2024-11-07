@@ -68,7 +68,6 @@ func (r *userRepository) GetTagsByUserID(ctx context.Context, userID string) ([]
 		return nil, err
 	}
 	return tags, nil
-
 }
 
 func (r *userRepository) GetAll(ctx context.Context) ([]model.User, error) {
