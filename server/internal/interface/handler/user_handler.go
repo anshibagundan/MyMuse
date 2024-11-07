@@ -43,3 +43,19 @@ func (h *UserHandler) GetAll(c *gin.Context) {
 	// レスポンスとしてユーザー情報を JSON 形式で返す
 	c.JSON(200, allUsersOutput)
 }
+
+func (h *UserHandler) HandleUnityLogin(ctx *gin.Context) {
+	request := request.CreateUserDTO{}
+	if err := ctx.ShouldBindJSON(&request); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	_, err := h.userUseCase.Login(ctx, request)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{"status": "ok"})
+}

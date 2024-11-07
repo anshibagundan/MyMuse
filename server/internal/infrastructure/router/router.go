@@ -27,6 +27,7 @@ func NewRouter(
 	auth := router.Group("/auth")
 	{
 		auth.POST("/login", userHandler.HandleLogin)
+		auth.POST("/unity", userHandler.HandleUnityLogin)
 	}
 
 	// 認証が必要なAPIルート
