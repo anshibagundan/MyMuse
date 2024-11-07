@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --clolor: #0a0a0a;
+  }
+}
+
+body {
+  color: var(--clolor);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("../../public/background.svg");
+  background-size: cover; /* 背景画像のサイズ調整 */
+  background-repeat: no-repeat; /* 繰り返しを防止 */
+  background-position: center; /* 中央に配置 */
+  background-attachment: fixed; /* 背景を固定 */
+}
+
+.custom-paragraph {
+  font-family: 'Klee'; /* フォントファミリーを指定 */
+  font-style: normal; /* フォントスタイルを指定 */
+  font-weight: 400; /* フォントウェイトを指定 */
+  font-size: 48px; /* フォントサイズを指定 */
+  line-height: 52px; /* 行の高さを指定 */
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* アイテムを中央に配置 */
+  color: #000000; /* テキストカラーを指定 */
+  text-shadow:
+          -2px -2px 0 #FFFFFF,
+          2px -2px 0 #FFFFFF,
+          -2px 2px 0 #FFFFFF,
+          2px 2px 0 #FFFFFF; /* 白の縁を追加 */
+}
+
+.custom-paragraph2 {
+  font-family: 'Klee'; /* フォントファミリーを指定 */
+  font-style: normal; /* フォントスタイルを指定 */
+  font-weight: 400; /* フォントウェイトを指定 */
+  font-size: 96px; /* フォントサイズを指定 */
+  line-height: 52px; /* 行の高さを指定 */
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* アイテムを中央に配置 */
+  color: #000000; /* テキストカラーを指定 */
+  text-shadow:
+          -2px -2px 0 #FFFFFF,
+          2px -2px 0 #FFFFFF,
+          -2px 2px 0 #FFFFFF,
+          2px 2px 0 #FFFFFF; /* 白の縁を追加 */
+}
+
+.custom-paragraph3 {
+  font-family: 'Klee'; /* フォントファミリーを指定 */
+  font-style: normal; /* フォントスタイルを指定 */
+  font-weight: 400; /* フォントウェイトを指定 */
+  font-size: 96px; /* フォントサイズを指定 */
+  line-height: 52px; /* 行の高さを指定 */
+  display: flex; /* フレックスボックスを使用 */
+  align-items: center; /* アイテムを中央に配置 */
+  color: #000000; /* テキストカラーを指定 */
+  text-shadow:
+          -2px -2px 0 #FFFFFF,
+          2px -2px 0 #FFFFFF,
+          -2px 2px 0 #FFFFFF,
+          2px 2px 0 #FFFFFF; /* 白の縁を追加 */
+}
+
+.contents1 {
+  height: 100vh;
+}

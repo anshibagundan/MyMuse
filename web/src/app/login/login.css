@@ -1,0 +1,11 @@
+.custom-paragraph {
+    font-family: 'Klee One'; /* フォントファミリーを指定 */
+    font-style: normal; /* フォントスタイルを指定 */
+    font-weight: 400; /* フォントウェイトを指定 */
+    font-size: 36px; /* フォントサイズを指定 */
+    line-height: 52px; /* 行の高さを指定 */
+    display: flex; /* フレックスボックスを使用 */
+    align-items: center; /* アイテムを中央に配置 */
+    color: #000000; /* テキストカラーを指定 */
+    border: 4px solid #FFFFFF; /* ボーダーを指定 */
+}
