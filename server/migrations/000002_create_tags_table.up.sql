@@ -1,7 +1,7 @@
 CREATE TABLE tags (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(20) NOT NULL,
-    user_id VARCHAR(255) NOT NULL,  -- usersテーブルのIDとリレーション
+    user_id INT NOT NULL,  -- usersテーブルのIDとリレーション
     `order` INT NOT NULL,  -- タグの順番を管理
     room_type VARCHAR(20) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

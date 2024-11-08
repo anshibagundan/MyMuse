@@ -1,14 +1,21 @@
 FROM golang:1.23-alpine
 
-# サブディレクトリをワーキングディレクトリとして設定
-WORKDIR /app/server
+# 必要なパッケージをインストール
+RUN apk add --no-cache git
 
+# ワーキングディレクトリを設定
+WORKDIR /app
+
+# ソースコードをコピー
 COPY . .
 
+# 依存関係をダウンロード
 RUN go mod download
 
-# 本番用にビルド
+# 本番用にビルド（CGOを無効にし、Linux用にビルド）
 RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/api/main.go
 
+EXPOSE 8080
+
 # 実行
-CMD ["/app/server/main"]
+CMD ["/app/main"]

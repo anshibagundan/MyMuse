@@ -6,3 +6,12 @@ type PhotoOutput struct {
 	DetailedTitle string
 	Content       string
 }
+
+type PhotoUnityOutput struct {
+	ID            uint
+	Title         string
+	DetailedTitle string
+	Content       string
+	Height        int
+	Width         int
+}
