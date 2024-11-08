@@ -40,7 +40,7 @@ export function PhotoDeleteForm({ photoId, onDeleteSuccess }: DeleteConfirmation
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="flex items-center">
+                <Button variant="outline" className="flex items-center buttons button-texts">
                     <TrashIcon className="w-5 h-5 text-red-500 mr-2" />
                     削除
                 </Button>

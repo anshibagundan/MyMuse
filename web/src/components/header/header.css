@@ -6,22 +6,10 @@
     color: #000000;
 }
 
-.my-muse-header {
-    position: fixed; /* ヘッダーを画面の上部に固定 */
-    top: 0; /* 上からの位置を0に設定 */
-    left: 0; /* 左からの位置を0に設定 */
-    width: 100%; /* 幅を100%に設定 */
-    z-index: 1000; /* 高い値を設定して、他の要素よりも前に表示 */
-    background-color: rgba(225, 224, 224, 0.8); /* 背景色を指定して、他のコンテンツと重なる際に見えるようにする */
-    padding: 8px; /* ヘッダーのパディングを指定 */
-}
-
 .login-button {
     /* Login */
     width: 120px;
     height: 40px;
-
-
 
     font-family: 'Klee';
     font-style: normal;
@@ -35,6 +23,26 @@
     border-left: 2px solid #7c7c7c;
 
     transition: background 0.3s, box-shadow 0.3s; /* ホバー時のトランジション */
+}
+
+@media (max-width: 520px) {
+    .my-muse-title {
+        font-size: 42px;
+    }
+    .login-button {
+        width: 90px;
+        height: 30px;
+    }
+}
+
+.my-muse-header {
+    position: fixed; /* ヘッダーを画面の上部に固定 */
+    top: 0; /* 上からの位置を0に設定 */
+    left: 0; /* 左からの位置を0に設定 */
+    width: 100%; /* 幅を100%に設定 */
+    z-index: 10; /* 高い値を設定して、他の要素よりも前に表示 */
+    background-color: rgba(225, 224, 224, 0.8); /* 背景色を指定して、他のコンテンツと重なる際に見えるようにする */
+    padding: 8px; /* ヘッダーのパディングを指定 */
 }
 
 .login-button:hover {

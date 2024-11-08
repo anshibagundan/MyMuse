@@ -129,7 +129,7 @@ export function PhotoCreateForm({ tagId, existingPhotosCount, onSuccess, disable
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="flex items-center" disabled={disabled}>
+                <Button variant="outline" className="flex items-center buttons" disabled={disabled}>
                     写真を追加
                 </Button>
             </DialogTrigger>

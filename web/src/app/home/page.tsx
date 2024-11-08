@@ -7,6 +7,7 @@ import { TagCreateForm } from '@/components/tag/TagCreateForm';
 import {TagContainer} from "@/components/home/TagContainer";
 import {useEffect, useRef, useState} from "react";
 import Sortable from 'sortablejs';
+import "./home.css"
 
 // 参照を保持するオブジェクトの型を定義
 interface PhotoContainerRefs {
@@ -155,8 +156,8 @@ export default function HomePage() {
 
     return (
         <div
-            className="grid grid-rows-[20px_minmax(calc(100vh-160px),1fr)_20px_minmax(calc(100vh-180px),1fr)]
-  items-center justify-items-center min-h-screen p-8 pb-20 gap-8 sm:p-20"
+            className="grid grid-rows-[20px_min(calc(100vh-160px))_20px_minmax(calc(100vh-180px),1fr)]
+  items-center justify-items-center min-h-screen p-8 pb-5 gap-8 sm:p-8"
             style={{fontFamily: 'var(--font-geist-sans)'}}
         >
             <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -164,18 +165,14 @@ export default function HomePage() {
                     <p className="custom-paragraph">
                         バーチャルで
                     </p>
-                    <br/>
-                    <br/>
-                    <p className="custom-paragraph2">
+                    <div className="custom-paragraph2">
                         あなただけの
                         <br/>
-                        <br/>
                         美術館を作ろう
-                    </p>
+                    </div>
                 </div>
             </main>
-            <div className="row-start-4 border rounded-lg p-4 shadow bg-white overflow-y-auto "
-                 style={{width: 'calc(100vw - 160px)', minHeight: 'calc(100vh - 240px)'}}>
+            <div className="row-start-4 shadow bg-white gallery-container">
                 {data?.tags === null ? (
                         <p className="text-gray-500">まだ部屋がありません。</p>
                 ) : (
@@ -183,26 +180,27 @@ export default function HomePage() {
                         {!editingTags[user.ID] ? (
                             <button
                                 onClick={() => toggleSortingMode(user.ID)}
-                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+                                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors mb-1"
                             >
-                                順番を変更
+                                部屋の順番を変更
                             </button>
                         ) : (
                             <div className="flex gap-2">
                                 <button
                                     onClick={() => saveSorting(user.ID)}
-                                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors"
+                                    className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors mb-1"
                                 >
                                     保存
                                 </button>
                                 <button
                                     onClick={() => cancelSorting(user.ID)}
-                                    className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
+                                    className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors mb-1"
                                 >
                                     キャンセル
                                 </button>
                             </div>
                         )}
+
                     <div ref={setPhotoContainerRef(user.ID)}
                     >
                         {data?.tags.map((tag) => (

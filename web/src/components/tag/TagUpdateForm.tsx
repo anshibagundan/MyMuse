@@ -61,7 +61,7 @@ export function TagEditForm({ tagId, currentName, currentRoomType, onSuccess }: 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="flex items-center">
+                <Button variant="outline" className="flex items-center buttons">
                     <PencilSquareIcon className="w-5 h-5 text-blue-500 mr-2" />
                     編集
                 </Button>
