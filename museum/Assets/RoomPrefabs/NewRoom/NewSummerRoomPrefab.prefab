@@ -482,6 +482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Summer_room
       objectReference: {fileID: 0}
+    - target: {fileID: 1875920997833677429, guid: 34377d8edc4ad41ffa696b4f4e222370, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4418303095965887071, guid: 34377d8edc4ad41ffa696b4f4e222370, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
