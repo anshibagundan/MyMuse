@@ -12,6 +12,7 @@ public class OVRToRoom : MonoBehaviour
     private float maxAngle = -80f;
     private float minAngle = -100f;
     public float rotateSpeed = 90f;
+    public AudioSource bgm;
 
     //部屋の名前表示
     private RoomNameCenterShow roomNameCenterShow;
@@ -31,6 +32,7 @@ public class OVRToRoom : MonoBehaviour
     {
         if (isEnterPicture)
         {
+            bgm.Stop();
             EnterPictureAnimation();
         }
 

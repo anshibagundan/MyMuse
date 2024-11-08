@@ -14,6 +14,8 @@ public class OVRToStreet : MonoBehaviour
      //部屋の名前表示
     private RoomNameLeftUpShow roomNameLeftUpShow;
 
+    public AudioSource bgm;
+
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class OVRToStreet : MonoBehaviour
     {
         if (isToStreet)
         {
+            bgm.Play();
             Drop();
         }
 
