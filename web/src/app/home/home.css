@@ -1,0 +1,18 @@
+.gallery-container {
+    width: calc(100vw - 160px);
+    min-height: calc(100vh - 240px);
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow-y: auto;
+}
+
+@media (max-width: 832px) {
+    .gallery-container {
+        width: calc(100vw - 64px); /* Adjust width for smaller screens */
+        min-height: calc(100vh - 160px); /* Adjust min-height for smaller screens */
+        padding: 12px; /* Adjust padding for smaller screens */
+    }
+}

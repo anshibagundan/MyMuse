@@ -5,6 +5,7 @@ import { PhotoCard } from '@/components/home/PhotoCard';
 import Sortable from 'sortablejs';
 import {useEffect, useRef, useState} from 'react';
 import {PhotoTag} from "@/types/photoGallery";
+import "./tagContainer.css"
 
 interface TagContainerInterface {
     tag: PhotoTag
@@ -121,7 +122,7 @@ export const TagContainer = ({ tag, onSortSuccess, onDeleteSuccess, onPhotoCreat
     }, []);
 
     return (
-        <div key={`tag_${tag.ID}`} data-tag-id={tag.ID} className="mb-8"
+        <div key={`tag_${tag.ID}`} data-tag-id={tag.ID} className="mb-4"
              style={{
                  backgroundImage: `url("${
                      tag.roomType === "春の部屋"
@@ -143,22 +144,17 @@ export const TagContainer = ({ tag, onSortSuccess, onDeleteSuccess, onPhotoCreat
                  overflow: 'hidden', // はみ出た部分を隠す
              }}
         >
-            <div style={{
-                padding: '10px',
-                display: 'flex',
-                gap: '20px',
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                alignItems: 'center'
-            }}
-            >
+            <div className="tagContainer">
                 <div className="text-xl font-semibold">{tag.name}</div>
-                <TagEditForm tagId={tag.ID} currentName={tag.name} currentRoomType={tag.roomType} onSuccess={onDeleteSuccess}/>
-                <TagDeleteForm tagId={tag.ID} onDeleteSuccess={onDeleteSuccess}
-                               disabled={(tag.photos?.length ?? 0) !== 0}/>
-                <PhotoCreateForm tagId={tag.ID} existingPhotosCount={tag.photos?.length ?? 0}
-                                 onSuccess={onPhotoCreateSuccess}
-                                 disabled={(tag.photos?.length ?? 0) >= 9}
-                />
+                <div className="tagContainerButtons">
+                    <TagEditForm tagId={tag.ID} currentName={tag.name} currentRoomType={tag.roomType} onSuccess={onDeleteSuccess}/>
+                    <TagDeleteForm tagId={tag.ID} onDeleteSuccess={onDeleteSuccess}
+                                   disabled={(tag.photos?.length ?? 0) !== 0}/>
+                    <PhotoCreateForm tagId={tag.ID} existingPhotosCount={tag.photos?.length ?? 0}
+                                     onSuccess={onPhotoCreateSuccess}
+                                     disabled={(tag.photos?.length ?? 0) >= 8}
+                    />
+                </div>
                 {!editingTags[tag.ID] ? (
                     <button
                         onClick={() => toggleSortingMode(tag.ID)}

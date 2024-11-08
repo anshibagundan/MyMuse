@@ -11,21 +11,6 @@ export function Header() {
     const { user} = useAuth();
     const [isSessionChecked, setIsSessionChecked] = useState(false);
 
-    // useEffect(() => {
-    //     const checkUserSession = async () => {
-    //         try {
-    //             await checkSession(); // Try to check the session
-    //             setIsSessionChecked(true); // Mark as checked if no error occurs
-    //         } catch (error) {
-    //             console.error('Session check failed', error);
-    //             setIsSessionChecked(true); // Mark as checked even if there's an error, to stop retrying
-    //         }
-    //     };
-    //
-    //     if (!isSessionChecked) {
-    //         checkUserSession();
-    //     }
-    // }, [checkSession, isSessionChecked]);
 
     const handleNavigation = () => {
         if (user) {

@@ -9,13 +9,10 @@ export default function Home() {
           <p className="custom-paragraph">
             　バーチャルで
           </p>
-          <br/>
-          <br/>
           <p className="custom-paragraph2">
             あなただけの
             <br/>
-            <br/>
-            　　美術館を作ろう!
+            美術館を作ろう
           </p>
         </div>
       </main>

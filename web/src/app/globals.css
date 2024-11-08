@@ -4,12 +4,10 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
     --foreground: #ededed;
     --clolor: #0a0a0a;
   }
@@ -22,7 +20,7 @@ body {
   background-image: url("../../public/background.svg");
   background-size: cover; /* 背景画像のサイズ調整 */
   background-repeat: no-repeat; /* 繰り返しを防止 */
-  background-position: center; /* 中央に配置 */
+  background-position: left; /* 中央に配置 */
   background-attachment: fixed; /* 背景を固定 */
 }
 
@@ -47,23 +45,6 @@ body {
   font-style: normal; /* フォントスタイルを指定 */
   font-weight: 400; /* フォントウェイトを指定 */
   font-size: 96px; /* フォントサイズを指定 */
-  line-height: 52px; /* 行の高さを指定 */
-  display: flex; /* フレックスボックスを使用 */
-  align-items: center; /* アイテムを中央に配置 */
-  color: #000000; /* テキストカラーを指定 */
-  text-shadow:
-          -2px -2px 0 #FFFFFF,
-          2px -2px 0 #FFFFFF,
-          -2px 2px 0 #FFFFFF,
-          2px 2px 0 #FFFFFF; /* 白の縁を追加 */
-}
-
-.custom-paragraph3 {
-  font-family: 'Klee'; /* フォントファミリーを指定 */
-  font-style: normal; /* フォントスタイルを指定 */
-  font-weight: 400; /* フォントウェイトを指定 */
-  font-size: 96px; /* フォントサイズを指定 */
-  line-height: 52px; /* 行の高さを指定 */
   display: flex; /* フレックスボックスを使用 */
   align-items: center; /* アイテムを中央に配置 */
   color: #000000; /* テキストカラーを指定 */
@@ -76,4 +57,44 @@ body {
 
 .contents1 {
   height: 100vh;
+}
+
+.photos{
+  min-width: 220px;
+  padding: 16px;
+}
+
+@media (max-width: 832px) {
+  .custom-paragraph {
+    font-size: 36px; /* フォントサイズを指定 */
+  }
+  .custom-paragraph2 {
+    font-size: 64px; /* フォントサイズを指定 */
+  }
+}
+
+@media (max-width: 520px) {
+  .custom-paragraph {
+    font-size: 24px; /* フォントサイズを指定 */
+  }
+  .custom-paragraph2 {
+    font-size: 42px; /* フォントサイズを指定 */
+  }
+  .buttons{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .button-texts{
+    font-size: 12px;
+  }
+  .photos{
+    min-width: 160px;
+    padding: 4px;
+  }
+  li[data-state="open"] {
+    z-index: 1000;
+    background: #e6dbd4;
+  }
 }

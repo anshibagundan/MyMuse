@@ -41,7 +41,7 @@ export function TagDeleteForm({tagId, onDeleteSuccess, disabled}: DeleteConfirma
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
-                <Button variant="outline" className="flex items-center" disabled={disabled}>
+                <Button variant="outline" className="flex items-center buttons" disabled={disabled}>
                     <TrashIcon className="w-5 h-5 text-red-500 mr-2"/>
                     削除
                 </Button>
