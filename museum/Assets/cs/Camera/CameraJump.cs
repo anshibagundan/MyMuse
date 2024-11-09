@@ -14,7 +14,7 @@ public class CameraJump : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping && !OVRToRoom.isEnterPicture && !OVRToStreet.isToStreet)
+        if ((Input.GetKeyDown(KeyCode.Space) || OVRInput.GetDown(OVRInput.Button.Three)) && !isJumping && !OVRToRoom.isEnterPicture && !OVRToStreet.isToStreet)
         {
             StartJump();
         }

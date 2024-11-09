@@ -36,7 +36,7 @@ public class OVRToStreet : MonoBehaviour
             Drop();
         }
 
-        if (80 < centerEyeAnchor.rotation.eulerAngles.y && centerEyeAnchor.rotation.eulerAngles.y < 100)
+        if (75 < centerEyeAnchor.rotation.eulerAngles.y && centerEyeAnchor.rotation.eulerAngles.y < 105)
         {
             canBackStreetByEyeTrack = true;
         }

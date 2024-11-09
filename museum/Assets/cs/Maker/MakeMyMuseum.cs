@@ -13,7 +13,6 @@ using Unity.VisualScripting;
 public class MakeMyMuseum : MonoBehaviour
 {
     [SerializeField] private GameObject streetPrefab;
-    [SerializeField] private GameObject roomPrefab;
     [SerializeField] private List<GameObject> roomList = new List<GameObject>();
     [SerializeField] private GameObject exhibitPrefab;
     [SerializeField] private GameObject photoPrefab;
@@ -109,11 +108,11 @@ public class MakeMyMuseum : MonoBehaviour
     private async Task<MuseumData> FetchMuseumData()
     {
         string userFromU = LogIn.UserName;
-        string url = "https://mymuse-79b7481a50f4.herokuapp.com/api/unity/" + "a"; // APIエンドポイントを適切に設定
+        string url = "https://mymuse-79b7481a50f4.herokuapp.com/api/unity/" + userFromU; // APIエンドポイントを適切に設定
         using (var client = new HttpClient())
         {
             var response = await client.GetAsync(url);
-            Debug.Log("aaaaaa");
+            ///Debug.Log("aaaaaa");
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();
