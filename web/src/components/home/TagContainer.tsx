@@ -133,9 +133,11 @@ export const TagContainer = ({ tag, onSortSuccess, onDeleteSuccess, onPhotoCreat
                                  ? "/autumn.svg"
                                  : tag.roomType === "冬の部屋"
                                      ? "/winter.svg"
-                                     : tag.roomType === "廊下"
-                                         ? "/hallway.svg"
-                                         : "/default.svg" // 通常部屋など、他のタイプやデフォルト
+                                     : tag.roomType === "冬の部屋"
+                                         ? "/winter.svg"
+                                         : tag.roomType === "廊下"
+                                             ? "/aisle.svg"
+                                             : "/default.svg" // 通常部屋など、他のタイプやデフォルト
                  }")`,
                  backgroundPosition: 'center',
                  backgroundSize: '1300px 650px', // 固定サイズ
